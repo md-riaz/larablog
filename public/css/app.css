@@ -11118,8 +11118,8 @@ button.toast-close-button {
 
 html {
   /*
-    * Variables
-    */
+      * Variables
+      */
   --JosefinSans: "Josefin Sans", "Baloo Da 2";
   --MrsSheppards: "Mrs Sheppards", cursive;
   --Raleway: "Raleway", sans-serif;
@@ -11223,6 +11223,10 @@ img {
 #page-contianer {
   margin: 0;
   padding: 0 45px;
+}
+
+#page-contianer .m-menu-open {
+  position: absolute;
 }
 
 .m-menu-open::before {

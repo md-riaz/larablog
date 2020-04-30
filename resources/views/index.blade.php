@@ -20,7 +20,8 @@
                     </a>
                     <div class="info d_flex">
                         <p class="date">{{$post->created_at->format('d F, Y')}}</p>
-                        <p class="author">by <a href="{{url('user/'.$post->user->id.'/posts')}}">{{$post->user->name}}</a></p>
+                        <p class="author">by <a
+                                href="{{url('user/'.$post->user->id.'/posts')}}">{{$post->user->name}}</a></p>
                     </div>
                 </div>
                 <p class="text_contents">
@@ -39,8 +40,8 @@
                 <span>Share</span>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#" onclick="event.preventDefault();copyToClipboard('{{ url('post/'. $post->slug) }}');" id="copy"><i class="far fa-clipboard"></i></a>
-                <input type="text" id="url" value="{{ url('post/'. $post->slug) }}" style="position:absolute;left:99999999px">
+                <a href="#" onclick="event.preventDefault();copyToClipboard('{{ url('post/'. $post->slug) }}');"
+                    id="copy"><i class="far fa-clipboard"></i></a>
             </div>
         </div>
     </div>
@@ -51,13 +52,16 @@
     @if ($posts instanceof \Illuminate\Pagination\LengthAwarePaginator))
     <nav class="pagination">
         <div class="page-links">
-            <a class="prev page-numbers {{$posts->previousPageUrl()==null ? 'd-none' : ''}}" href="{{$posts->previousPageUrl()}}">previews</a>
+            <a class="prev page-numbers {{$posts->previousPageUrl()==null ? 'd-none' : ''}}"
+                href="{{$posts->previousPageUrl()}}">previews</a>
 
             @for ($i = 1; $i < $posts->lastPage()+1; $i++)
-                <a class="page-numbers {{$posts->currentPage() == $i ? 'current' : '' }}" href=" {{$posts->url($i)}}">{{$i}}</a>
+                <a class="page-numbers {{$posts->currentPage() == $i ? 'current' : '' }}"
+                    href=" {{$posts->url($i)}}">{{$i}}</a>
                 @endfor
 
-                <a class="next page-numbers {{$posts->previousPageUrl()==null ? "d-none" : ""}}" href="{{$posts->nextPageUrl()}}">next</a>
+                <a class="next page-numbers {{$posts->previousPageUrl()==null ? "d-none" : ""}}"
+                    href="{{$posts->nextPageUrl()}}">next</a>
         </div>
 
     </nav>
@@ -66,4 +70,3 @@
 
 </section>
 @endsection
-
