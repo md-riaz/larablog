@@ -113,7 +113,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('post.show', compact('post'));
+        $previous = Post::where('id', '<', $post->id)->orderBy('id','desc')->first();
+        $next = Post::where('id', '>', $post->id)->orderBy('id')->first();
+        return view('post.show', compact('post','previous','next'));
     }
 
     /**
