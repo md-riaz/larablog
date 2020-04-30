@@ -6,7 +6,7 @@ use App\Post;
 use App\Category;
 use Illuminate\View\Component;
 
-class sidebar extends Component
+class Sidebar extends Component
 {
     /**
      * Create a new component instance.

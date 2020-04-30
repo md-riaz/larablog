@@ -5,7 +5,7 @@ namespace App\View\Components;
 use App\Post;
 use Illuminate\View\Component;
 
-class featured extends Component
+class Featured extends Component
 {
     /**
      * Create a new component instance.
