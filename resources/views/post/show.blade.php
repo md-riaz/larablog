@@ -36,9 +36,10 @@
         <div class="post_buttons d_flex details_page">
             <div class="post_share">
                 <span>Share</span>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-pinterest"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#" onclick="event.preventDefault();copyToClipboard('{{ url('post/'. $post->slug) }}');" id="copy"><i class="far fa-clipboard"></i></a>
+                <input type="text" id="url" value="{{ url('post/'. $post->slug) }}" style="position:absolute;left:99999999px">
             </div>
         </div>
     </div>

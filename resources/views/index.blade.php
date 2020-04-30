@@ -26,7 +26,7 @@
                 <p class="text_contents">
                     {{Str::limit(strip_tags($post->details), 300)}}
                     <br>
-                    <a class="read_more" href="{{ url('post/'. $post->id) }}">...</a>
+                    <a class="read_more" href="{{ url('post/'. $post->slug) }}">...</a>
                 </p>
             </div>
         </div>
