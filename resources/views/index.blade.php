@@ -49,7 +49,7 @@
     <p class="text-center">No articles to show</p>
     @endforelse
 
-    @if ($posts instanceof \Illuminate\Pagination\LengthAwarePaginator))
+    @if ($posts instanceof \Illuminate\Pagination\LengthAwarePaginator)
     <nav class="pagination">
         <div class="page-links">
             <a class="prev page-numbers {{$posts->previousPageUrl()==null ? 'd-none' : ''}}"

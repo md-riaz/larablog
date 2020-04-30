@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +33,7 @@ Route::get('/post/{post:slug}', 'PostController@show')->name('post.show'); //acc
 
 //Users Control
 Route::resource('users', 'UsersController')->middleware('auth');
-Route::post('users/change/password/{user}', 'UsersController@passChange')->name('users.passChange');
+Route::post('/users/change/password/{user}', 'UsersController@passChange')->name('users.passChange');
 
 // Newshelter
 Route::post('/newshelter', 'SubscriberController@store')->name('subscribe');

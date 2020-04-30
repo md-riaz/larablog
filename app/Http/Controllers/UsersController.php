@@ -54,7 +54,7 @@ class UsersController extends Controller
         if (Hash::check(request()->password, $user->password)) {
             $user->update(\request()->validate([
                 'name' => 'required',
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id]
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id]
             ]));
 
             $notification = [
@@ -82,17 +82,22 @@ class UsersController extends Controller
     }
 
     public function passChange(User $user)
-    {  if (request()->current_password == request()->password){
-        $notification = [
-            'message' => 'New password can not be your old password',
-            'alert-type' => 'error'
-        ];
-        return back()->with($notification);
-    }
-        if (Hash::check(request()->current_password, $user->password)) {
-            request()->validate([
-                'password' => 'required|confirmed|min:6'
-            ]);
+    {
+        if (request()->current_password == request()->password) {
+            $notification = [
+                'message' => 'New password can not be your old password',
+                'alert-type' => 'error'
+            ];
         }
+        if (Hash::check(request()->current_password, $user->password)) {
+            $user->update(request()->validate([
+                'password' => 'required|confirmed|min:6'
+            ]));
+            $notification = [
+                'message' => 'Password Changed',
+                'alert-type' => 'success'
+            ];
+        }
+        return back()->with($notification);
     }
 }
