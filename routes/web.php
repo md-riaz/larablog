@@ -29,7 +29,7 @@ Route::resource('category', 'CategoryController')->middleware('auth');
 
 // Post Control
 Route::resource('post', 'PostController');
-Route::get('/post/{post:slug}', 'PostController@show')->name('post.show'); //access post using slug
+Route::get('/post/{post:slug}', 'PostController@show')->name('post.show')->where('slug', '[\w\d\-\_]+'); //access post using slug
 
 //Users Control
 Route::resource('users', 'UsersController')->middleware('auth');
