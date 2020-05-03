@@ -3,6 +3,7 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="{{asset('js/toastr.min.js')}}"></script>
+<script src="{{ asset('js/prism.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
     function copyToClipboard(text) {
