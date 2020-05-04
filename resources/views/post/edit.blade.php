@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 
 @section('title' ,'Edit Post')
+@section('stylesheet')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+@stop
 @section('content')
 
 <div class="container">
@@ -32,6 +35,17 @@
                         <label for="slug">Slug</label>
                         <input type="text" name="slug" placeholder="Slug/url*" aria-required="true" required max="100"
                             id="slug" value="{{$post->slug}}" />
+                    </div>
+                    <!-- Tags Form Input -->
+                    <div class="form-group">
+                        <label for="tags">Tags</label>
+                        <select class="js-select-multiple form-control" name="tags[]" multiple="multiple">
+                            @forelse ($tags as $tag)
+                                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                            @empty
+                                <option value="">No tag available</option>
+                            @endforelse
+                        </select>
                     </div>
                     <div class="input-field">
                         <label for="image">Feature Image</label>
@@ -71,7 +85,19 @@
 @section('scripts')
 <script src="https://cdn.tiny.cloud/1/g4v6bvbx4urk83696i0550n97p3pmdnlda80zmyq6f88iu4w/tinymce/5/tinymce.min.js">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script>
+    // Select2 int
+    $(document).ready(function() {
+        $('.js-select-multiple').select2();
+        var tags =[]; // declare an empty array
+        @foreach ($post->tags as $tag) // loop through each tags
+          tags["{{$tag->id}}"] = "{{$tag->id}}"; // convert all tag id's into an associative array
+        @endforeach
+        $('.js-select-multiple').select2().val(tags).trigger('change'); // Notify any JS components that the value changed
+
+
+        // TinyMCE
     tinymce.init({
             selector: 'textarea#post_desc',
             menubar: false,
@@ -106,5 +132,6 @@
             branding: false,
             height: 500
         });
+    });
 </script>
 @endsection

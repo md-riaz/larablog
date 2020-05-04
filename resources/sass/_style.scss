@@ -1308,42 +1308,13 @@ textarea {
 /*
 * Admin Panel styles
 */
-$bright-red: #b30015;
-$dark-blue: #2a00b3;
-$deep-cerulean: #0077b3;
-$bondi-blue: #00b0b3;
-$heliotrope: #8a7dff;
-$silver-chalice: #a6a6a6;
-$scorpion: #595959;
-$tundora: #444;
-$mine-shaft: #363636;
-$cod-gray: #111;
+
 .buttons {
   margin-bottom: 100px;
 
   li {
     width: 145px;
     margin-right: 2px;
-
-    &:nth-child(1) {
-      background-color: $heliotrope;
-    }
-
-    &:nth-child(2) {
-      background-color: $bright-red;
-    }
-
-    &:nth-child(3) {
-      background-color: $dark-blue;
-    }
-
-    &:nth-child(4) {
-      background-color: $deep-cerulean;
-    }
-
-    &:nth-child(5) {
-      background-color: $bondi-blue;
-    }
 
     button {
       background-color: inherit;
@@ -1390,4 +1361,14 @@ a:not([href]) {
 //Register page
 input#remember {
   width: 15px;
+}
+// tags selection color
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #b59f5b;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #e1d9bd;
+    border: 1px solid #fff9f9;
 }

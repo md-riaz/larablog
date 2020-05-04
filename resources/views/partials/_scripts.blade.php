@@ -5,6 +5,7 @@
 <script src="{{asset('js/toastr.min.js')}}"></script>
 <script src="{{ asset('js/prism.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <!-- copy url from share method -->
 <script>
     function copyToClipboard(text) {

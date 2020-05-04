@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -12,8 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Mews\Purifier\Facades\Purifier;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
+
     /**
      * Instantiate a new controller instance.
      *
@@ -33,6 +34,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
+
         return view('post.all', compact('posts'));
     }
 
@@ -44,7 +46,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('post.write', compact('categories'));
+        $tags = Tag::all();
+
+        return view('post.write', compact('categories', 'tags'));
     }
 
     /**
@@ -57,11 +61,11 @@ class PostController extends Controller
     {
         // Validate input data
         $validatedData = $request->validate([
-            'title' => 'required|max:255|min:5|unique:posts,title',
+            'title'       => 'required|max:255|min:5|unique:posts,title',
             'category_id' => 'required|min:1',
-            'slug' => 'required|max:100|min:5|alpha_dash|unique:posts,slug',
-            'post_img' => 'required | image |max:1000',
-            'details' => 'required|min:100',
+            'slug'        => 'required|max:100|min:5|alpha_dash|unique:posts,slug',
+            'post_img'    => 'required | image |max:1000',
+            'details'     => 'required|min:100',
 
         ]);
 
@@ -86,20 +90,23 @@ class PostController extends Controller
             }
         }
         $insert_post->save();
+        // add tags to post_tag pivot table after post stored to database
+        $insert_post->tags()->sync(request()->tags, false);
 
         // If success then return with $notification message
         if ($insert_post) {
             $notification = [
-                'message' => 'Successfully Posted',
+                'message'    => 'Successfully Posted',
                 'alert-type' => 'success'
             ];
 
             return redirect()->to('post')->with($notification);
         } else {
             $notification = [
-                'message' => 'Error Occurred!',
+                'message'    => 'Error Occurred!',
                 'alert-type' => 'error'
             ];
+
             // Return to previews page
             return redirect()->back()->with($notification);
         }
@@ -113,9 +120,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $previous = Post::where('id', '<', $post->id)->orderBy('id','desc')->first();
+        $previous = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
         $next = Post::where('id', '>', $post->id)->orderBy('id')->first();
-        return view('post.show', compact('post','previous','next'));
+
+        return view('post.show', compact('post', 'previous', 'next'));
     }
 
     /**
@@ -127,7 +135,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('post.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -141,11 +151,11 @@ class PostController extends Controller
     {
         // Validate input data
         $validatedData = $request->validate([
-            'title' => 'required|max:255|min:5|unique:posts,title,' . $post->id,
-            'slug' => 'required|max:100|min:5|alpha_dash|unique:posts,slug,' . $post->id,
+            'title'       => 'required|max:255|min:5|unique:posts,title,' . $post->id,
+            'slug'        => 'required|max:100|min:5|alpha_dash|unique:posts,slug,' . $post->id,
             'category_id' => 'required|min:1',
-            'post_img' => 'image|max:1000',
-            'details' => 'required |min:100',
+            'post_img'    => 'image|max:1000',
+            'details'     => 'required |min:100',
         ]);
 
 
@@ -170,20 +180,24 @@ class PostController extends Controller
             $post->post_img = $request->old_img;
         }
         $post->save();
-
+        // Check if tags has changed or not
+        if (isset(request()->tags)) {
+            $post->tags()->sync(request()->tags);
+        }
         // If success then return with $notification message
         if ($post) {
             $notification = [
-                'message' => 'Successfully Posted',
+                'message'    => 'Successfully Posted',
                 'alert-type' => 'success'
             ];
 
             return redirect()->to('post')->with($notification);
         } else {
             $notification = [
-                'message' => 'Error Occurred!',
+                'message'    => 'Error Occurred!',
                 'alert-type' => 'error'
             ];
+
             // Return to previews page
             return redirect()->back()->with($notification);
         }
@@ -201,7 +215,7 @@ class PostController extends Controller
         unlink($post->post_img);
 
         $notification = [
-            'message' => 'Successfully Post Deleted',
+            'message'    => 'Successfully Post Deleted',
             'alert-type' => 'success'
         ];
 

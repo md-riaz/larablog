@@ -2,10 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    @yield('stylesheet')
     <!--    head files   -->
     @include('partials._head')
 
-    @yield('stylesheet')
 </head>
 
 <body>

@@ -27,6 +27,10 @@ Route::get('/user/{id}/posts', 'HomeController@UserPosts');
 // Categories
 Route::resource('category', 'CategoryController')->middleware('auth');
 
+// Tags
+Route::get('/tags', 'TagController@index')->name('tags.show');
+Route::post('store/tag', 'TagController@store')->name('tags.store');
+
 // Post Control
 Route::resource('post', 'PostController');
 Route::get('/post/{post:slug}', 'PostController@show')->name('post.show')->where('slug', '[\w\d\-\_]+'); //access post using slug

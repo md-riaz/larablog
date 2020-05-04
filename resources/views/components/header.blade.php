@@ -33,6 +33,7 @@
                                         <li><a href="{{ URL::to('category') }}">all category</a></li>
                                         <li><a href="{{ URL::to('post') }}">all posts</a></li>
                                         <li><a href="{{ URL::to('category/create') }}">add category</a></li>
+                                        <li><a href="{{ route('tags.show') }}">store Tag</a></li>
                                         <li><a href="{{ URL::to('post/create') }}">write post</a></li>
                                     </ul>
                                 </li>
