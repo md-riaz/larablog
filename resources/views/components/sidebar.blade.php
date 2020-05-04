@@ -67,7 +67,7 @@
                 </div>
                 <div class="posts_desc">
                     <p class="date">{{ $item->created_at->format('d F, Y')}}</p>
-                    <a href="">
+                    <a href="{{url('post/'.$item->slug)}}">
                         <h3 class="title">{{ $item->title}}</h3>
                     </a>
                 </div>
