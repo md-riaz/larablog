@@ -31,6 +31,13 @@
                 {!! $post->details !!}
 
             </div>
+            <div class="tags">
+                <ul class="taglist d_flex">
+                    @foreach ($post->tags as $tag)
+                        <li><a href="{{url('/')}}?tag={{$tag->name}}">{{$tag->name}}</a></li>
+                    @endforeach
+                </ul>
+            </div>
 
         </div>
         <div class="post_buttons d_flex details_page">

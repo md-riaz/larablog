@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use App\User;
 use App\Category;
 use Illuminate\Http\Request;
@@ -27,7 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category')->latest('updated_at')->paginate(7);
+        if (request('tag')) {
+            $posts = Tag::where('name', request('tag'))->firstOrFail()->posts;
+        } else {
+            $posts = Post::with('category')->latest('updated_at')->paginate(7);
+        }
         return view('index', compact('posts'));
     }
 

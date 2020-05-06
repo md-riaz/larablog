@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\View\Component;
 
 class Sidebar extends Component
@@ -27,7 +28,8 @@ class Sidebar extends Component
     {
         return view('components.sidebar',[
             'categories'=> Category::with('posts')->get(),
-            'latest' => Post::take(5)->latest('created_at')->get()
+            'latest' => Post::take(5)->latest('created_at')->get(),
+            'tags' => Tag::take(10)->latest('created_at')->get()
         ]);
     }
 }

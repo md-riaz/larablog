@@ -14,9 +14,9 @@
                 </p>
                 <div class="social">
                     <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/mdriaz.wd"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/md_riaz__"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-google-plus-g"></i></a>
                 </div>
             </div>
@@ -96,4 +96,14 @@
         </div>
     </div>
 
+    <!-- Tags Section -->
+    <div class="tags">
+        <h3 class="bottom_bar">tags</h3>
+        <ul class="taglist d_flex">
+            @foreach ($tags as $tag)
+                <li><a href="{{url('/')}}?tag={{$tag->name}}">{{$tag->name}}</a></li>
+            @endforeach
+        </ul>
+    </div>
+    <!-- Tags Section End -->
 </section>
