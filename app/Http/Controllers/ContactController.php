@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
-class ContactController extends Controller
-{
+use App\Mail\ContactMe;
+use Illuminate\Support\Facades\Mail;
+use function request;
 
+class ContactController extends Controller {
 
-    /**
-     * ContactController constructor.
-     */
-    public function __construct()
+    public function index()
     {
-        $this->middleware('auth');
+        return view('contact.index');
     }
 
     public function getMessage()
     {
+        request()->validate([
+            'name'    => 'required',
+            'email'   => 'required | email',
+            'message' => 'required'
+        ]);
+        Mail::to(request('email'))->send(new ContactMe(request('name'), request('message')));
 
+        return response()->json(['success' => 'Your message is successfully sent']);
     }
 }

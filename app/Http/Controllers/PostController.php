@@ -150,7 +150,7 @@ class PostController extends Controller {
     public function update(Request $request, Post $post)
     {
         // Validate input data
-        $validatedData = $request->validate([
+       $request->validate([
             'title'       => 'required|max:255|min:5|unique:posts,title,' . $post->id,
             'slug'        => 'required|max:100|min:5|alpha_dash|unique:posts,slug,' . $post->id,
             'category_id' => 'required|min:1',
@@ -211,6 +211,7 @@ class PostController extends Controller {
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
         $post->delete();
         unlink($post->post_img);
 

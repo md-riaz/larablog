@@ -28,8 +28,7 @@ Route::get('/user/{id}/posts', 'HomeController@UserPosts');
 Route::resource('category', 'CategoryController')->middleware('auth');
 
 // Tags
-Route::get('/tags', 'TagController@index')->name('tags.show');
-Route::post('store/tag', 'TagController@store')->name('tags.store');
+Route::resource('tag', 'TagController');
 
 // Post Control
 Route::resource('post', 'PostController');
@@ -41,3 +40,11 @@ Route::post('/users/change/password/{user}', 'UsersController@passChange')->name
 
 // Newshelter
 Route::post('/newshelter', 'SubscriberController@store')->name('subscribe');
+
+//Contact Page
+Route::get('/contact', 'ContactController@index')->name('contact');
+Route::post('/contact', 'ContactController@getMessage')->name('contact');
+
+// Comments
+Route::post('comment.store/{post_id}', 'CommentController@store')->name('comment.store');
+Route::resource('comment', 'CommentController');

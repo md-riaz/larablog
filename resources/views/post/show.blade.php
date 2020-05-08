@@ -1,111 +1,141 @@
 @extends('layouts.layout')
 @section('title')
-{{$post->title}}
+    {{$post->title}}
 @endsection
 
 @section('content')
-<section class="post-list">
-    <div class="posts">
-        <div class="posts_contents_wrapper d_flex">
-            <div class="post_details d_flex">
-                <div class="posts_title">
-                    <div class="categories d_flex">
-                        <a href="{{url('/categories/'.$post->category->slug)}}">{{$post->category->name}}</a>
-                    </div>
-                    <a class="title">
-                        {{$post->title}}
-                    </a>
-                    <div class="info d_flex">
-                        <p class="date">{{$post->created_at->format('jS F, Y')}}</p>
-                        <p class="author">by <a
-                                href="{{url('user/'.$post->user->id.'/posts')}}">{{$post->user->name}}</a></p>
+    <section class="post-list">
+        <div class="posts">
+            <div class="posts_contents_wrapper d_flex">
+                <div class="post_details d_flex">
+                    <div class="posts_title">
+                        <div class="categories d_flex">
+                            <a href="{{url('/categories/'.$post->category->slug)}}">{{$post->category->name}}</a>
+                        </div>
+                        <a class="title">
+                            {{$post->title}}
+                        </a>
+                        <div class="info d_flex">
+                            <p class="date">{{$post->created_at->format('jS F, Y')}}</p>
+                            <p class="author">by <a
+                                    href="{{url('user/'.$post->user->id.'/posts')}}">{{$post->user->name}}</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="post_img">
-                <img src="{{asset($post->post_img)}}" alt="preview_img" />
-            </div>
-            <div class="entry-content">
+                <div class="post_img">
+                    <img src="{{asset($post->post_img)}}" alt="preview_img"/>
+                </div>
+                <div class="entry-content">
 
-                {!! $post->details !!}
+                    {!! $post->details !!}
+
+                </div>
+                <div class="tags">
+                    <ul class="taglist d_flex">
+                        @foreach ($post->tags as $tag)
+                            <li><a href="{{url('/')}}?tag={{$tag->name}}">{{$tag->name}}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
 
             </div>
-            <div class="tags">
-                <ul class="taglist d_flex">
-                    @foreach ($post->tags as $tag)
-                        <li><a href="{{url('/')}}?tag={{$tag->name}}">{{$tag->name}}</a></li>
-                    @endforeach
-                </ul>
+            <div class="post_buttons d_flex details_page">
+                <div class="post_share">
+                    <span>Share</span>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#" onclick="event.stopPropagation();copyToClipboard('{{ url('post/'. $post->slug) }}');"
+                       id="copy"><i class="far fa-clipboard"></i>
+                    </a>
+                </div>
             </div>
-
         </div>
-        <div class="post_buttons d_flex details_page">
-            <div class="post_share">
-                <span>Share</span>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#" onclick="event.preventDefault();copyToClipboard('{{ url('post/'. $post->slug) }}');"
-                    id="copy"><i class="far fa-clipboard"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <nav class="post-navigation d_flex">
-        @if (isset($previous))
-        <div class="prev_post post_link">
-            <a href="{{ url('post/'.$previous->slug) }}" rel="prev">
-                <span class="meta-nav">Previous Post</span>
-                <div class="post-content">
+        <nav class="post-navigation d_flex">
+            @if (isset($previous))
+                <div class="prev_post post_link">
+                    <a href="{{ url('post/'.$previous->slug) }}" rel="prev">
+                        <span class="meta-nav">Previous Post</span>
+                        <div class="post-content">
                     <span class="title">
                         {{ $previous->title }}
                     </span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        @endif
-        @if (isset($next))
-        <div class="next-post post_link">
-            <a href="{{ url('post/'.$next->slug) }}" rel="prev">
-                <span class="meta-nav">Next Post</span>
-                <div class="post-content">
-                    <span class="title">{{ $next->title }}</span>
+            @endif
+            @if (isset($next))
+                <div class="next-post post_link">
+                    <a href="{{ url('post/'.$next->slug) }}" rel="prev">
+                        <span class="meta-nav">Next Post</span>
+                        <div class="post-content">
+                            <span class="title">{{ $next->title }}</span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        @endif
+            @endif
 
-    </nav>
-    <div class="post-comments">
-        <h2 class="comments-title">0 Comments</h2>
-        <div class="comment-respond">
-            <h2 class="comment-reply-title">
-                Leave a comment
-            </h2>
-            <form action="#!" method="post">
-                @csrf
-                @method('PUT')
-                <p class="comment-notes">
-                    Your email address will not be published.
-                </p>
-                <div class="input-field">
-                    <textarea name="comment" placeholder="Your Comment *" aria-required="true"></textarea>
-                </div>
+        </nav>
+        <div class="post-comments">
+            <h2 class="comments-title">{{count($post->comments)}} Comments</h2>
+            <div class="comment-section">
+                @forelse($post->comments as $comment)
+                    <div class="single-comment d-flex pt-2 pb-2">
+                        <div class="single-comment__avater mr-3"></div>
+                        <div class="single-comment__content">
+                            <div class="single-comment--name font-weight-bold">
+                                {{  $comment->name }}
+                                <small class="d-block text-black-50">{{ $comment->email }}</small>
+                            </div>
+                            <div class="single-comment--message">
+                                {{ $comment->comment }}
+                            </div>
+                            @auth
+                                <form action="" method="post" id="deleteForm">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn text-danger" id="delete"
+                                            data-action="{{ route('comment.destroy',$comment->id) }}"><i
+                                            class="fas fa-trash"></i></button>
+                                </form>
+                            @endauth
+                        </div>
+                    </div>
+                @empty
 
-                <div class="d_flex comment-double">
+                @endforelse
+
+            </div>
+
+            <div class="comment-respond">
+                <h2 class="comment-reply-title">
+                    Leave a comment
+                </h2>
+                <form action="{{route('comment.store',$post->id)}}" method="post">
+                    @csrf
+
+                    <p class="comment-notes">
+                        Your email address will not be published.
+                    </p>
+
                     <div class="input-field">
-                        <input type="text" name="author" placeholder="Name *" aria-required="true" />
+                        <textarea name="comment" placeholder="Your Comment *" aria-required="true"></textarea>
                     </div>
-                    <div class="input-field">
-                        <input type="email" name="email" placeholder="Email *" aria-required="true" />
+
+                    <div class="d_flex comment-double">
+                        <div class="input-field">
+                            <input type="text" name="name" placeholder="Name *" aria-required="true"/>
+                        </div>
+                        <div class="input-field">
+                            <input type="email" name="email" placeholder="Email *" aria-required="true"/>
+                        </div>
                     </div>
-                </div>
-                <p class="form-submit">
-                    <input name="submit" type="submit" class="submit" value="Post Your Comment" />
-                </p>
-            </form>
+                    <p class="form-submit">
+                        <input name="submit" type="submit" class="submit" value="Post Your Comment"/>
+                    </p>
+                </form>
+            </div>
+            <!-- #respond -->
         </div>
-        <!-- #respond -->
-    </div>
-</section>
+    </section>
 @endsection

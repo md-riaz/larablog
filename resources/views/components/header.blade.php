@@ -7,23 +7,17 @@
                     <div class="close"><i class="fas fa-times"></i></div>
                     <ul class="menu">
                         <li><a href="{{ URL::to('/') }}">home</a></li>
-                        <li class="multi-nav"><a href="#" class="">features</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item"><a href="#">Classic</a></li>
-                                <li class="menu-item"><a href="#">Two Columns</a></li>
-                                <li class="menu-item"><a href="#">Three Columns</a></li>
-                                <li class="menu-item"><a href="#">Masonry</a></li>
-                            </ul>
-                        </li>
                         <li class="multi-nav"><a href="#">categories</a>
                             <ul class="sub-menu">
                                 @foreach ($categories as $category)
-                                    <li class="menu-item"><a href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
+                                    <li class="menu-item"><a
+                                            href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </li>
-                        <li><a href="#">contact</a></li>
+                        <li><a href="{{ route('contact') }}">contact</a></li>
+
                         @if (Route::has('login'))
                             @auth
                                 <li class="multi-nav">
@@ -33,16 +27,19 @@
                                         <li><a href="{{ URL::to('category') }}">all category</a></li>
                                         <li><a href="{{ URL::to('post') }}">all posts</a></li>
                                         <li><a href="{{ URL::to('category/create') }}">add category</a></li>
-                                        <li><a href="{{ route('tags.show') }}">store Tag</a></li>
+                                        <li><a href="{{ route('tag.index') }}">Tags</a></li>
                                         <li><a href="{{ URL::to('post/create') }}">write post</a></li>
                                     </ul>
                                 </li>
+
                                 <li>
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
                                         @csrf
                                     </form>
                                 </li>

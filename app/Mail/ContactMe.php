@@ -3,22 +3,25 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactMe extends Mailable
-{
+class ContactMe extends Mailable {
+
     use Queueable, SerializesModels;
+
+    public $name;
+    public $message;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $request
      */
-    public function __construct()
+    public function __construct($name, $message)
     {
-        //
+        $this->name = $name;
+        $this->message = $message;
     }
 
     /**
@@ -28,6 +31,7 @@ class ContactMe extends Mailable
      */
     public function build()
     {
-        return $this->markdown('=email.contact-me');
+        return $this->subject($this->name . ' sent you a message in larablog')
+            ->markdown('email.contact-me');
     }
 }

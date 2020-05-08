@@ -18,13 +18,12 @@
 
         <tr>
             <td>{{ $posts->firstItem() + $loop->index }}</td>
-            <td>{{Str::limit($row->title, 25)}}</td>
+            <td><a href="{{ url('post/'. $row->slug) }}">{{Str::limit($row->title, 25)}}</a></td>
             <td>{{ $row->user->name }}</td>
             <td>{{ $row->category->name }}</td>
             <td><img src="{{asset($row->post_img)}}" alt="" width="80" height="50"></td>
             <td>
                 <a href="{{ url('post/'. $row->id.'/edit') }}" class="btn table-primary"><i class="far fa-edit"></i></a>
-                <a href="{{ url('post/'. $row->slug) }}" class="btn text-secondary"><i class="far fa-eye"></i></a>
 
                 <form action="" id="deleteForm" method="POST">
                     @csrf
