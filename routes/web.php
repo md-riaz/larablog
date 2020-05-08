@@ -46,5 +46,5 @@ Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact', 'ContactController@getMessage')->name('contact');
 
 // Comments
-Route::post('comment.store/{post_id}', 'CommentController@store')->name('comment.store');
+Route::post('comment.store/{post_id}', 'CommentController@store')->name('comment.store/');
 Route::resource('comment', 'CommentController');

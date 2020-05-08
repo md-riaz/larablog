@@ -33,8 +33,8 @@
         </div>
         <div class="post_buttons d_flex">
             <div class="comments d_flex">
-                <i class="far fa-comment"></i>
-                <p>24</p>
+                <a href="{{ url('post/'. $post->slug.'#comments') }}"> <i class="far fa-comment"></i>
+                    {{ count($post->comments) }}</a>
             </div>
             <div class="post_share">
                 <span>Share</span>
