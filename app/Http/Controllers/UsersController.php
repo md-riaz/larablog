@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -78,7 +79,25 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        echo "You cannot delete a user right now";
+        if ($user->id == 1) {
+            $user->delete();
+            $notification = [
+                'message' => 'Admin deleted user successfully',
+                'alert-type' => 'success'
+            ];
+        } elseif (Auth::id() == $user->id) {
+            $user->delete();
+            $notification = [
+                'message' => 'Your account deleted successfully',
+                'alert-type' => 'success'
+            ];
+        }
+        $notification = [
+            'message' => 'You cannot delete account that you don\'t own',
+            'alert-type' => 'success'
+        ];
+
+        return back()->with($notification);
     }
 
     public function passChange(User $user)
