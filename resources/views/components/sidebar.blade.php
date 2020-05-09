@@ -4,7 +4,7 @@
     <div class="about_me">
         <div class="about_me_inner d_flex">
             <div class="avtar">
-                <img src="{{ asset('images/me.png')}}" alt="my_avtar">
+                <img data-src="{{ asset('images/me.png')}}" class="lazyload" alt="my_avtar">
             </div>
             <div class="title">about me</div>
             <p class="texts">Hi! My name is
@@ -13,7 +13,7 @@
                 <p class="follow">follow me on
                 </p>
                 <div class="social">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://twitter.com/MDRiaz53949149"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.facebook.com/mdriaz.wd"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     <a href="https://www.instagram.com/md_riaz__"><i class="fab fa-instagram"></i></a>
@@ -36,23 +36,23 @@
     <div class="follow_insta">
         <h3 class="bottom_bar">follow@md_riaz___</h3>
         <div class="photo_grid d_flex">
-            <img src="{{ asset('images/photo_grid/1.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/2.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/3.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/4.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/5.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/6.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/7.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/8.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/9.jpg')}}" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/1.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/2.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/4.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/5.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/3.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/6.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/7.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/8.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/9.jpg')}}" class="lazyload" alt="grid_image">
         </div>
     </div>
     <div class="category_section">
         <h3 class="bottom_bar">categories</h3>
         <ul>
             @foreach ($categories as $category)
-            <li class="menu-item"><a href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
-                <span>{{count($category->posts)}}</span></li> <!-- count how many post in a category -->
+                <li class="menu-item"><a href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
+                    <span>{{count($category->posts)}}</span></li> <!-- count how many post in a category -->
             @endforeach
         </ul>
     </div>
@@ -61,17 +61,17 @@
 
         <div class="latest_post_wrapper">
             @foreach ($latest as $item)
-            <div class="latest_post d_flex">
-                <div class="latest_post_preview_img">
-                    <img src="{{ asset($item->post_img)}}" alt="preview_img">
+                <div class="latest_post d_flex">
+                    <div class="latest_post_preview_img">
+                        <img data-src="{{ asset($item->post_img)}}" class="lazyload" alt="preview_img">
+                    </div>
+                    <div class="posts_desc">
+                        <p class="date">{{ $item->created_at->format('d F, Y')}}</p>
+                        <a href="{{url('post/'.$item->slug)}}">
+                            <h3 class="title">{{ $item->title}}</h3>
+                        </a>
+                    </div>
                 </div>
-                <div class="posts_desc">
-                    <p class="date">{{ $item->created_at->format('d F, Y')}}</p>
-                    <a href="{{url('post/'.$item->slug)}}">
-                        <h3 class="title">{{ $item->title}}</h3>
-                    </a>
-                </div>
-            </div>
             @endforeach
 
         </div>
@@ -85,7 +85,7 @@
     <div class="banner">
         <h3 class="bottom_bar">banner</h3>
         <div class="banner_img">
-            <img src="{{ asset('images/banner.jpg')}}" alt="banner_img">
+            <img data-src="{{ asset('images/banner.jpg')}}" class="lazyload" alt="banner_img">
         </div>
     </div>
 

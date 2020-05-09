@@ -8,10 +8,11 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
-class CategoryController extends Controller
-{
+class CategoryController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +21,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate(10);
+
         return view('category.allcategory', compact('categories'));
     }
 
@@ -45,27 +47,28 @@ class CategoryController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:25|min:1|unique:categories'
         ]);
-        $slug = strtolower(str_replace(" ", "-", $request->name));
+        $slug = Str::of($request->name)->slug('-'); //The slug method generates a URL friendly "slug" from the given string:
         // Create a new instance of Category model
         $insert_category = new Category;
         $insert_category->name = $request->name;
         $insert_category->slug = $slug;
-        $insert_category->user_id = Auth::user()->id;
+        $insert_category->user_id = Auth::id();
 
         $insert_category->save();
 
         // If success then return with $notification message
         if ($insert_category) {
             $notification = [
-                'message' => 'Successfully Category Inserted',
+                'message'    => 'Successfully Category Inserted',
                 'alert-type' => 'success'
             ];
         } else {
             $notification = [
-                'message' => 'Error Occurred!',
+                'message'    => 'Error Occurred!',
                 'alert-type' => 'error'
             ];
         }
+
         // Return to previews page
         return redirect()->back()->with($notification);
     }
@@ -109,22 +112,24 @@ class CategoryController extends Controller
         $update = $category;
         $update->name = $request->name;
         $update->slug = $request->slug;
-        $update->user_id = Auth::user()->id;
+        $update->user_id = Auth::id();
 
         $update->save();
 
         // If success then return with $notification message
         if ($update) {
             $notification = [
-                'message' => 'Successfully Category Updated',
+                'message'    => 'Successfully Category Updated',
                 'alert-type' => 'success'
             ];
+
             return redirect()->to('/category')->with($notification);
         } else {
             $notification = [
-                'message' => 'Error Occurred!',
+                'message'    => 'Error Occurred!',
                 'alert-type' => 'error'
             ];
+
             // Return to previews page
             return redirect()->back()->with($notification);
         }
@@ -142,10 +147,11 @@ class CategoryController extends Controller
 
         if ($category) {
             $notification = [
-                'message' => 'Successfully Category Deleted',
+                'message'    => 'Successfully Category Deleted',
                 'alert-type' => 'success'
             ];
         }
+
         return redirect()->back()->with($notification);
     }
 }

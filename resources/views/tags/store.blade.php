@@ -30,7 +30,7 @@
                         {{-- Displaying The Validation Errors --}}
 
                         <p class="form-submit">
-                            <input name="submit" type="submit" class="submit" value="Add Tag" required/>
+                            <input type="submit" class="submit" value="Add Tag" required/>
                         </p>
                     </form>
                 </div>
@@ -48,19 +48,21 @@
                     </thead>
                     <tbody>
                     @foreach ($tags as $tag)
-                            <tr>
-                                <td>{{$tag->id}}</td>
-                                <td><a href="{{ route('tag.show', $tag->id) }}">{{$tag->name}}</a></td>
-                                <td>
-                                    <a href="{{ route('tag.edit',$tag->id) }}" class="btn table-primary"><i class="far fa-edit"></i></a>
-                                    <form action="" id="deleteForm" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn text-danger" id="delete"
-                                                data-action="{{ route('tag.destroy',$tag->id) }}"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{$tag->id}}</td>
+                            <td><a href="{{ route('tag.show', $tag->id) }}">{{$tag->name}}</a></td>
+                            <td>
+                                <a href="{{ route('tag.edit',$tag->id) }}" class="btn table-primary"><i
+                                            class="far fa-edit"></i></a>
+                                <form action="" id="deleteForm" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn text-danger" id="delete"
+                                            data-action="{{ route('tag.destroy',$tag->id) }}"><i
+                                                class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
                     @endforeach
                     </tbody>
 

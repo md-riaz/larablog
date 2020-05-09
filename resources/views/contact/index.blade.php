@@ -47,7 +47,7 @@
                                  style="width: 0%;background-color: #b59f5b"></div>
                         </div>
                         <p class="form-submit">
-                            <input name="submit" type="submit" class="submit" value="Send"/>
+                            <input type="submit" class="submit" value="Send"/>
                         </p>
                     </form>
                 </div>

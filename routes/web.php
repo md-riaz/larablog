@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 
-Auth::routes();
+Auth::routes(['verify', true]);
 
 // Category Posts
 Route::get('/categories/{slug:slug}', 'HomeController@CategoryPosts');

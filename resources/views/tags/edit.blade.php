@@ -31,7 +31,7 @@
                         {{-- Displaying The Validation Errors --}}
 
                         <p class="form-submit">
-                            <input name="submit" type="submit" class="submit" value="Update Tag" required/>
+                            <input type="submit" class="submit" value="Update Tag" required/>
                         </p>
                     </form>
                 </div>

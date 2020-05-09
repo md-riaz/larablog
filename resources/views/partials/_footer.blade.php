@@ -18,9 +18,9 @@
             <a href="#"><i class="fab fa-tumblr"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-pinterest"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="http://www.facebook.com/mdriaz.official"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-google-plus-g"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/md_riaz___/"><i class="fab fa-instagram"></i></a>
         </div>
     </div>
     <p class="on_top">on top</p>

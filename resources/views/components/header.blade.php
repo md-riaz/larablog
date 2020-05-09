@@ -63,10 +63,11 @@
             </div>
 
             <div class="social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/MDRiaz53949149"><i class="fab fa-twitter"></i></a>
+                <a href="http://www.facebook.com/mdriaz.official"><i
+                        class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/md_riaz___/"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-google-plus-g"></i></a>
             </div>
         </div>
