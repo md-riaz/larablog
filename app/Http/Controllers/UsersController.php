@@ -79,7 +79,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->id == 1) {
+        if (Auth::id() == 1) {
             $user->delete();
             $notification = [
                 'message' => 'Admin deleted user successfully',
@@ -91,11 +91,13 @@ class UsersController extends Controller
                 'message' => 'Your account deleted successfully',
                 'alert-type' => 'success'
             ];
+        } else {
+            $notification = [
+                'message' => 'You cannot delete account that you don\'t own',
+                'alert-type' => 'error'
+            ];
         }
-        $notification = [
-            'message' => 'You cannot delete account that you don\'t own',
-            'alert-type' => 'success'
-        ];
+
 
         return back()->with($notification);
     }
