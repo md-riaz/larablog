@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-12 offset-md-4">
+                            <div class="col-md-12">
                                 <button type="submit" class="btn bg-sienna text-white px-5">
                                     {{ __('Reset Password') }}
                                 </button>
