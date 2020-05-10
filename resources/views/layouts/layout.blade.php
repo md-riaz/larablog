@@ -9,36 +9,36 @@
 </head>
 
 <body>
-<div id="page-contianer">
-    <!--    header component   -->
-    <x-header></x-header>
+    <div id="page-contianer">
+        <!--    header component   -->
+        <x-header></x-header>
 
-    <main id="main-content">
-        <!-- feature post component -->
-        @if (Request::is('/'))
-            <x-featured/>
-        @endif
+        <main id="main-content">
+            <!-- feature post component -->
+            @if (Request::is('/'))
+            <x-featured />
+            @endif
 
-        <section class="Contents">
-            <div class="container d_flex">
-                <div class="innerContainer">
+            <section class="Contents">
+                <div class="container d_flex">
+                    <div class="innerContainer row">
 
-                    @yield('content')
+                        @yield('content')
 
+                    </div>
+                    <!--    side bar component   -->
+                    <x-sidebar />
                 </div>
-                <!--    side bar component   -->
-                <x-sidebar/>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
 
-    <!--    footer section   -->
-    @include('partials._footer')
-</div>
-<!--    all scripts   -->
-@include('partials._scripts')
+        <!--    footer section   -->
+        @include('partials._footer')
+    </div>
+    <!--    all scripts   -->
+    @include('partials._scripts')
 
-@yield('scripts')
+    @yield('scripts')
 
 </body>
 
