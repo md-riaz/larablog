@@ -4,7 +4,15 @@
 
 @section('content')
     <div class="col p-0">
-        <h3>Posted by author's</h3>
+
+        <!-- Table title -->
+        <div class="d-flex justify-content-between mb-3">
+            <h3 class="mb-0">Posted by author's</h3>
+            <a href="{{ route('post.create') }}" class="btn bg-sienna text-white">Write</a>
+        </div>
+        <!-- Table title End -->
+
+        <!-- Data Table -->
         <div class="table-responsive text-nowrap">
             <table class="table table--striped ">
                 <thead>
@@ -17,14 +25,23 @@
                 </thead>
                 <tbody>
                 @forelse ($posts as $row)
-
                     <tr>
-                        <td>{{ $posts->firstItem() + $loop->index }}</td>
-                        <td><a href="{{ url('post/'. $row->slug) }}">{{Str::limit($row->title, 25)}}</a></td>
-                        <td>{{ $row->user->name }}</td>
-                        <td>{{ $row->category->name }}</td>
-                        <td><img data-src="{{asset($row->post_img)}}" class="lazyload" loading="lazy" alt="post thumb"
-                                 width="80" height="50"></td>
+                        <td>
+                            {{ $posts->firstItem() + $loop->index }}
+                        </td>
+                        <td>
+                            <a href="{{ url('post/'. $row->slug) }}">{{Str::limit($row->title, 25)}}</a>
+                        </td>
+                        <td>
+                            <a href="{{ url('user/'.$row->user->id.'/post') }}">{{ $row->user->name }}</a>
+                        </td>
+                        <td>
+                            <a href="{{url('/categories/'.$row->category->slug)}}">{{ $row->category->name }}</a>
+                        </td>
+                        <td>
+                            <img data-src="{{asset($row->post_img)}}" class="lazyload" loading="lazy" alt="post thumb"
+                                 width="80" height="50">
+                        </td>
                         <td>
                             <a href="{{ url('post/'. $row->id.'/edit') }}" class="btn table-primary"><i
                                     class="far fa-edit"></i></a>
@@ -44,7 +61,7 @@
                 @endforelse
                 </tbody>
             </table>
-
+            <!-- Data Table End -->
             <!-- pagination -->
         @if ($posts->lastPage() > 1)
             {{ $posts->links() }}

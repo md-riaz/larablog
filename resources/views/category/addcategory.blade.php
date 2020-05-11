@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="col p-0">
         <div class="write-post">
             <div class="post-comments">
                 <h2 class="comments-title">Add a new category here.</h2>

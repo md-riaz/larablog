@@ -1,7 +1,9 @@
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-
+<script async src="{{ asset('js/toastr.min.js') }}"></script>
+<script async src="{{ asset('js/sweetalert2.js') }}"></script>
 <script async src="{{ asset('js/app.js') }}"></script>
+
 <!-- copy url from share method -->
 <script>
 

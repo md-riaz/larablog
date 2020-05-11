@@ -24,7 +24,8 @@
                 </div>
 
                 <div class="post_img">
-                    <img data-src="{{asset($post->post_img)}}" class="lazyload" loading="lazy" alt="preview_img"/>
+                    <img data-src="{{asset($post->post_img)}}" class="lazyload" loading="lazy" alt="preview_img"
+                         width="800"/>
                 </div>
                 <div class="entry-content">
 

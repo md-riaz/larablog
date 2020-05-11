@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="col p-0">
         <div class="write-post">
             <div class="post-comments">
                 <h2 class="comments-title">Edit an existing category.</h2>
@@ -14,11 +14,13 @@
                         <div class="d_flex comment-double">
                             <div class="input-field">
                                 <label for="">Category Name</label>
-                                <input type="text" name="name" value="{{ $category->name }}" aria-required="true"/>
+                                <input type="text" name="name" value="{{ $category->name }}" aria-required="true"
+                                       id="title"/>
                             </div>
                             <div class="input-field">
                                 <label for="">Category Slug</label>
-                                <input type="text" name="slug" value="{{ $category->slug }}" aria-required="true"/>
+                                <input type="text" name="slug" value="{{ $category->slug }}" aria-required="true"
+                                       id="slug"/>
                             </div>
                         </div>
 

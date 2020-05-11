@@ -9,7 +9,9 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
+use Intervention\Image\Facades\Image;
 use Mews\Purifier\Facades\Purifier;
 use Str;
 
@@ -78,14 +80,25 @@ class PostController extends Controller {
         $image = request()->file('post_img');
 
         if ($image) {
-            $image_name = hexdec(uniqid());
-            $ext = Str::of($image->getClientOriginalExtension())->lower();
-            $img_full_name = $image_name . '.' . $ext;
-            $upload_path = 'uploads/post_img/';
-            $img_url = $upload_path . $img_full_name;
-            $success = $image->move($upload_path, $img_full_name);
+            $image_name = hexdec(uniqid()) . "." . Str::of($image->getClientOriginalExtension())->lower(); // unique number with lowercase extension
+            $upload_path = 'uploads/post_img/';                                                            // set the public path
+            $img_url = $upload_path . $image_name;
+
+            /* resize image to new width but do not exceed original size*/
+            $new_img = Image::make($image)->widen(800, function ($constraint) {
+                $constraint->upsize();
+            });
+            /*  save the new image with new name */
+            $success = $new_img->save($img_url);
+
+            /* Set thumbnail from main image */
+            $thumbnail_url = 'uploads/thumbnail/' . $image_name;
+            // crop the best fitting
+            Image::make($image)->fit(400, 250)->save($thumbnail_url);
+            /* if success set img url to database */
             if ($success) {
                 $insert_post->post_img = $img_url;
+                $insert_post->thumbnail = $thumbnail_url;
             }
         }
         $insert_post->save();
@@ -166,16 +179,28 @@ class PostController extends Controller {
         $post->user_id = Auth::id();
         $image = request()->file('post_img');
         if ($image) {
-            $image_name = hexdec(uniqid());
-            $ext = strtolower($image->getClientOriginalExtension());
-            $img_full_name = $image_name . '.' . $ext;
-            $upload_path = 'uploads/post_img/';
-            $img_url = $upload_path . $img_full_name;
-            $success = $image->move($upload_path, $img_full_name);
+            $image_name = hexdec(uniqid()) . "." . Str::of($image->getClientOriginalExtension())->lower(); // unique number with lowercase extension
+            $upload_path = 'uploads/post_img/';                                                            // set the public path
+            $img_url = $upload_path . $image_name;
+
+            /* resize image to new width but do not exceed original size*/
+            $new_img = Image::make($image)->widen(800, function ($constraint) {
+                $constraint->upsize();
+            });
+            /*  save the new image with new name */
+            $success = $new_img->save($img_url);
+
+            /* Set thumbnail from main image */
+            $thumbnail_url = 'uploads/thumbnail/' . $image_name;
+            /* crop the best fitting */
+            Image::make($image)->fit(400, 250)->save($thumbnail_url);
+            /* if success delete old photos and set img url to database */
             if ($success) {
+                File::delete($post->post_img, $post->thumbnail);
                 $post->post_img = $img_url;
+                $post->thumbnail = $thumbnail_url;
             }
-            unlink(request('old_img'));
+
         }
         $post->save();
         // Check if tags has changed or not
@@ -185,7 +210,7 @@ class PostController extends Controller {
         // If success then return with $notification message
         if ($post) {
             $notification = [
-                'message'    => 'Successfully Posted',
+                'message'    => 'Successfully Updated',
                 'alert-type' => 'success'
             ];
 
@@ -211,7 +236,8 @@ class PostController extends Controller {
     public function destroy(Post $post)
     {
         $post->tags()->detach();
-        unlink($post->post_img);
+        File::delete($post->thumbnail);
+        File::delete($post->post_img);
         $post->delete();
 
         $notification = [

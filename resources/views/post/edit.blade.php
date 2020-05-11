@@ -6,7 +6,7 @@
 @stop
 @section('content')
 
-    <div class="container">
+    <div class="col p-0">
         <div class="write-post">
             <div class="post-comments">
                 <h2 class="comments-title">Edit an existing post.</h2>
@@ -55,7 +55,6 @@
                             <label for="">Current Image</label><br>
                             <img data-src="{{ asset($post->post_img) }}" class="lazyload" loading="lazy" alt="old img"
                                  width="300">
-                            <input type="hidden" name="old_img" value="{{$post->post_img}}">
                         </div>
                         <div class=" input-field">
                             <label for="post_desc">Post body</label>

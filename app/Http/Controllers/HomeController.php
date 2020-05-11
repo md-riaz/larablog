@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use App\Tag;
 use App\User;
-use App\Category;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
-{
+class HomeController extends Controller {
+
     /**
      * Create a new controller instance.
      *
@@ -33,6 +31,7 @@ class HomeController extends Controller
         } else {
             $posts = Post::with('category')->latest('updated_at')->paginate(7);
         }
+
         return view('index', compact('posts'));
     }
 
@@ -40,6 +39,7 @@ class HomeController extends Controller
     public function CategoryPosts(Category $slug)
     {
         $posts = $slug->posts;
+
         return view('index', compact('posts'));
     }
 
@@ -47,6 +47,7 @@ class HomeController extends Controller
     {
 
         $posts = $id->posts;
+
         return view('index', compact('posts'));
     }
 }

@@ -49,16 +49,17 @@ class CategoryController extends Controller {
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store()
     {
+
         // Validate input data
-        $validatedData = $request->validate([
+        request()->validate([
             'name' => 'required|max:25|min:1|unique:categories'
         ]);
-        $slug = Str::of($request->name)->slug('-'); //The slug method generates a URL friendly "slug" from the given string:
+        $slug = Str::of(request()->name)->slug('-'); //The slug method generates a URL friendly "slug" from the given string:
         // Create a new instance of Category model
         $insert_category = new Category;
-        $insert_category->name = $request->name;
+        $insert_category->name = Str::of(request('name'))->title(); // convert name into capitalised
         $insert_category->slug = $slug;
         $insert_category->user_id = Auth::id();
 
@@ -110,16 +111,17 @@ class CategoryController extends Controller {
      * @param Category $category
      * @return RedirectResponse
      */
-    public function update(Request $request, Category $category)
+    public function update(Category $category)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:25|min:1|unique:categories,name' . $category->id,
-            'slug' => 'required|max:25|min:1|unique:categories,slug' . $category->id
+
+        request()->validate([
+            'name' => 'required|max:25|min:1|unique:categories,name,' . $category->id,
+            'slug' => 'required|max:25|min:1|unique:categories,slug,' . $category->id
         ]);
 
         $update = $category;
-        $update->name = $request->name;
-        $update->slug = $request->slug;
+        $update->name = request('name');
+        $update->slug = request('slug');
         $update->user_id = Auth::id();
 
         $update->save();
