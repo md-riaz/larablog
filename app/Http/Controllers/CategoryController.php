@@ -14,6 +14,14 @@ use Illuminate\View\View;
 class CategoryController extends Controller {
 
     /**
+     * CategoryController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return Application|Factory|View

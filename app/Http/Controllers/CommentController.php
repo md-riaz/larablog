@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 class CommentController extends Controller {
 
     /**
+     * CommentController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('verified')->except('store');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request

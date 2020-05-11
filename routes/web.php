@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 
-Auth::routes(['verify', true]);
+Auth::routes(['verify' => true]);
 
 // Category Posts
 Route::get('/categories/{slug:slug}', 'HomeController@CategoryPosts');
@@ -25,7 +25,7 @@ Route::get('/categories/{slug:slug}', 'HomeController@CategoryPosts');
 Route::get('/user/{id}/posts', 'HomeController@UserPosts');
 
 // Categories
-Route::resource('category', 'CategoryController')->middleware('auth');
+Route::resource('category', 'CategoryController');
 
 // Tags
 Route::resource('tag', 'TagController');
@@ -35,7 +35,7 @@ Route::resource('post', 'PostController');
 Route::get('/post/{post:slug}', 'PostController@show')->name('post.show')->where('slug', '[\w\d\-\_]+'); //access post using slug
 
 //Users Control
-Route::resource('users', 'UsersController')->middleware('auth');
+Route::resource('users', 'UsersController');
 Route::post('/users/change/password/{user}', 'UsersController@passChange')->name('users.passChange');
 
 // Newshelter
