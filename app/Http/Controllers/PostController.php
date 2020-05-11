@@ -85,7 +85,7 @@ class PostController extends Controller {
             $img_url = $upload_path . $image_name;
 
             /* resize image to new width but do not exceed original size*/
-            $new_img = Image::make($image)->widen(800, function ($constraint) {
+            $new_img = Image::make($image)->encode('webp', 80)->widen(800, function ($constraint) {
                 $constraint->upsize();
             });
             /*  save the new image with new name */
@@ -94,7 +94,7 @@ class PostController extends Controller {
             /* Set thumbnail from main image */
             $thumbnail_url = 'uploads/thumbnail/' . $image_name;
             // crop the best fitting
-            Image::make($image)->fit(400, 250)->save($thumbnail_url);
+            Image::make($image)->encode('webp', 80)->fit(400, 250)->save($thumbnail_url);
             /* if success set img url to database */
             if ($success) {
                 $insert_post->post_img = $img_url;
@@ -184,7 +184,7 @@ class PostController extends Controller {
             $img_url = $upload_path . $image_name;
 
             /* resize image to new width but do not exceed original size*/
-            $new_img = Image::make($image)->widen(800, function ($constraint) {
+            $new_img = Image::make($image)->encode('webp', 80)->widen(800, function ($constraint) {
                 $constraint->upsize();
             });
             /*  save the new image with new name */
@@ -193,7 +193,7 @@ class PostController extends Controller {
             /* Set thumbnail from main image */
             $thumbnail_url = 'uploads/thumbnail/' . $image_name;
             /* crop the best fitting */
-            Image::make($image)->fit(400, 250)->save($thumbnail_url);
+            Image::make($image)->encode('webp', 80)->fit(400, 250)->save($thumbnail_url);
             /* if success delete old photos and set img url to database */
             if ($success) {
                 File::delete($post->post_img, $post->thumbnail);
