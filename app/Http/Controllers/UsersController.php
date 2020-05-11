@@ -4,14 +4,29 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Auth;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
+use function request;
 
 class UsersController extends Controller {
 
     /**
+     * UsersController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -24,8 +39,8 @@ class UsersController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param \App\User $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return Response
      */
     public function show(User $user)
     {
@@ -35,8 +50,8 @@ class UsersController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param User $user
+     * @return Factory|View
      */
     public function edit(User $user)
     {
@@ -46,14 +61,14 @@ class UsersController extends Controller {
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\User $user
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse|Redirector
      */
     public function update(User $user)
     {
         if (Hash::check(request()->password, $user->password)) {
-            $user->update(\request()->validate([
+            $user->update(request()->validate([
                 'name'  => 'required',
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id]
             ]));
@@ -76,8 +91,8 @@ class UsersController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\User $user
-     * @return \Illuminate\Http\RedirectResponse
+     * @param User $user
+     * @return RedirectResponse
      */
     public function destroy(User $user)
     {
