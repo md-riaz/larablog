@@ -3,63 +3,63 @@
 
 @section('content')
 
-    <div class="container">
-        <div class="write-post">
-            <div class="post-comments">
-                <h2 class="comments-title">Send me an message</h2>
-                <div class="comment-respond">
-                    <form action="{{ route('contact') }}" method="post" id="form">
+<div class="col">
+    <div class="write-post">
+        <div class="post-comments">
+            <h2 class="comments-title">Send me an message</h2>
+            <div class="comment-respond">
+                <form action="{{ route('contact') }}" method="post" id="form">
                     @csrf
                     <!-- Name Form Input -->
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" id="name" class="form-control" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
 
-                        <!-- Email Form Input -->
-                        <div class="form-group">
-                            <label for="email">E-mail Address</label>
-                            <input type="email" name="email" id="email" class="form-control" required>
-                        </div>
+                    <!-- Email Form Input -->
+                    <div class="form-group">
+                        <label for="email">E-mail Address</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
+                    </div>
 
-                        <!-- Message Form Input -->
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea rows="8" name="message" id="message" class="form-control" required></textarea>
-                        </div><!-- Message Form Input End -->
+                    <!-- Message Form Input -->
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea rows="8" name="message" id="message" class="form-control" required></textarea>
+                    </div><!-- Message Form Input End -->
 
-                        <!--  Displaying The Validation Errors -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                    <!--  Displaying The Validation Errors -->
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
                     <!-- Displaying The Validation Errors -->
 
 
-                        <div class="progress form-group">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                                 style="width: 0%;background-color: #b59f5b"></div>
-                        </div>
-                        <p class="form-submit">
-                            <input type="submit" class="submit" value="Send"/>
-                        </p>
-                    </form>
-                </div>
-                <!-- #respond -->
+                    <div class="progress form-group">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                            style="width: 0%;background-color: #b59f5b"></div>
+                    </div>
+                    <p class="form-submit">
+                        <input type="submit" class="flat-btn" value="Send" />
+                    </p>
+                </form>
             </div>
+            <!-- #respond -->
         </div>
     </div>
+</div>
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
             $("#form").submit(function (event) {
                 event.preventDefault(); //prevent default action
                 var post_url = $(this).attr("action"); //get form action url
@@ -99,6 +99,5 @@
                 });
             });
         });
-    </script>
+</script>
 @endsection
-

@@ -34,7 +34,7 @@
                 <div class="post_buttons d_flex">
                     <div class="comments d_flex">
                         <a href="{{ url('post/'. $post->slug.'#comments') }}"> <i class="far fa-comment"></i>
-                            {{ count($post->comments) }}</a>
+                            {{ $post->comments->count() }}</a>
                     </div>
                     <div class="post_share">
                         <span>Share</span>
@@ -49,25 +49,13 @@
             </div>
         @empty
             <p class="text-center">No articles to show</p>
-        @endforelse
+    @endforelse
 
-        @if ($posts instanceof \Illuminate\Pagination\LengthAwarePaginator)
-            <nav class="pagination">
-                <div class="page-links">
-                    <a class="prev page-numbers {{$posts->previousPageUrl()==null ? 'd-none' : ''}}"
-                       href="{{$posts->previousPageUrl()}}">previews</a>
-
-                    @for ($i = 1; $i < $posts->lastPage()+1; $i++)
-                        <a class="page-numbers {{$posts->currentPage() == $i ? 'current' : '' }}"
-                           href=" {{$posts->url($i)}}">{{$i}}</a>
-                    @endfor
-
-                    <a class="next page-numbers {{$posts->previousPageUrl()==null ? "d-none" : ""}}"
-                       href="{{$posts->nextPageUrl()}}">next</a>
-                </div>
-
-            </nav>
-        @endif
+    <!-- pagination -->
+    @if ($posts->lastPage() > 1)
+        {{ $posts->links() }}
+    @endif
+    <!-- pagination End -->
 
 
     </section>

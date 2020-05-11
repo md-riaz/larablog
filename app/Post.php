@@ -31,6 +31,6 @@ class Post extends Model {
     // A post has many comments
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->latest(); // Get the latest comments
     }
 }

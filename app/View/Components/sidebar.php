@@ -2,13 +2,13 @@
 
 namespace App\View\Components;
 
-use App\Post;
 use App\Category;
+use App\Post;
 use App\Tag;
 use Illuminate\View\Component;
 
-class Sidebar extends Component
-{
+class Sidebar extends Component {
+
     /**
      * Create a new component instance.
      *
@@ -26,10 +26,10 @@ class Sidebar extends Component
      */
     public function render()
     {
-        return view('components.sidebar',[
-            'categories'=> Category::with('posts')->get(),
-            'latest' => Post::take(5)->latest('created_at')->get(),
-            'tags' => Tag::take(10)->latest('created_at')->get()
+        return view('components.sidebar', [
+            'categories' => Category::withCount('posts')->get(),
+            'latest'     => Post::take(5)->latest('created_at')->get(),
+            'tags'       => Tag::take(10)->latest('created_at')->get()
         ]);
     }
 }

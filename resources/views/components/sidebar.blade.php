@@ -52,7 +52,7 @@
         <ul>
             @foreach ($categories as $category)
                 <li class="menu-item"><a href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
-                    <span>{{count($category->posts)}}</span></li> <!-- count how many post in a category -->
+                    <span>{{$category->posts_count}}</span></li> <!-- count how many post in a category -->
             @endforeach
         </ul>
     </div>

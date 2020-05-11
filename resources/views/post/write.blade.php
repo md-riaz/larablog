@@ -5,7 +5,7 @@
 @stop
 @section('content')
 
-    <div class="container">
+    <div class="col">
         <div class="write-post">
             <div class="post-comments">
                 <h2 class="comments-title">Write a new post here.</h2>
@@ -23,7 +23,8 @@
                                 <select name="category_id" id="category">
                                     <option value="" disabled selected>Select a Category</option>
                                     @foreach ($categories as $item)
-                                        <option value="{{ $item->id }}" {{old('category_id')==$item->id  ? 'selected' : ''}}>
+                                        <option
+                                            value="{{ $item->id }}" {{old('category_id')==$item->id  ? 'selected' : ''}}>
                                             {{ $item->name }}</option>
                                     @endforeach
                                 </select>

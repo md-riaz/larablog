@@ -79,7 +79,7 @@
 
         </nav>
         <div class="post-comments" id="comments">
-            <h2 class="comments-title">{{count($post->comments)}} Comments</h2>
+            <h2 class="comments-title">{{$post->comments->count()}} Comments</h2>
             <div class="comment-section">
                 @forelse($post->comments as $comment)
                     <div class="single-comment d-flex pt-2 pb-2">

@@ -7,7 +7,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class TagController extends Controller {
@@ -28,7 +27,7 @@ class TagController extends Controller {
     public function index()
     {
         return view('tags.store', [
-            'tags' => Tag::all()
+            'tags' => Tag::paginate(20)
         ]);
     }
 
@@ -62,7 +61,7 @@ class TagController extends Controller {
      */
     public function show(Tag $tag)
     {
-       return view('tags.show', compact('tag'));
+        return view('tags.show', compact('tag'));
     }
 
     /**

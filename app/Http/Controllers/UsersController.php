@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Auth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
-{
+class UsersController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::withCount(['posts', 'comments'])->paginate(10);
+
         return view('users.all', compact('users'));
     }
 
@@ -24,7 +24,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -35,7 +35,7 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user)
@@ -46,54 +46,56 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User $user
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(User $user)
     {
         if (Hash::check(request()->password, $user->password)) {
             $user->update(\request()->validate([
-                'name' => 'required',
+                'name'  => 'required',
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id]
             ]));
 
             $notification = [
-                'message' => 'Changes saved',
+                'message'    => 'Changes saved',
                 'alert-type' => 'success'
             ];
+
             return redirect()->route('users.index')->with($notification);
         }
         $notification = [
-            'message' => 'Password does not match from database',
+            'message'    => 'Password does not match from database',
             'alert-type' => 'error'
         ];
+
         return back()->with($notification);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param \App\User $user
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $user)
     {
-        if (Auth::id() == 1) {
+        if (Auth::id() === 1) {
             $user->delete();
             $notification = [
-                'message' => 'Admin deleted user successfully',
+                'message'    => 'Admin deleted user successfully',
                 'alert-type' => 'success'
             ];
-        } elseif (Auth::id() == $user->id) {
+        } elseif (Auth::id() === $user->id) {
             $user->delete();
             $notification = [
-                'message' => 'Your account deleted successfully',
+                'message'    => 'Your account deleted successfully',
                 'alert-type' => 'success'
             ];
         } else {
             $notification = [
-                'message' => 'You cannot delete account that you don\'t own',
+                'message'    => 'You cannot delete account that you don\'t own',
                 'alert-type' => 'error'
             ];
         }
@@ -106,7 +108,7 @@ class UsersController extends Controller
     {
         if (request()->current_password == request()->password) {
             $notification = [
-                'message' => 'New password can not be your old password',
+                'message'    => 'New password can not be your old password',
                 'alert-type' => 'error'
             ];
         }
@@ -115,10 +117,11 @@ class UsersController extends Controller
                 'password' => 'required|confirmed|min:6'
             ]));
             $notification = [
-                'message' => 'Password Changed',
+                'message'    => 'Password Changed',
                 'alert-type' => 'success'
             ];
         }
+
         return back()->with($notification);
     }
 }
