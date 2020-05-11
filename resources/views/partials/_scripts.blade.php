@@ -47,7 +47,7 @@
         document.body.removeChild(dummy);
         alert('copied!');
     }
-    
+
     <!-- Native Lazyload -->
     if ('loading' in HTMLImageElement.prototype) {
         const images = document.querySelectorAll('img[loading="lazy"]');
