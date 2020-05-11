@@ -23,7 +23,8 @@
                         <td><a href="{{ url('post/'. $row->slug) }}">{{Str::limit($row->title, 25)}}</a></td>
                         <td>{{ $row->user->name }}</td>
                         <td>{{ $row->category->name }}</td>
-                        <td><img src="{{asset($row->post_img)}}" alt="" width="80" height="50"></td>
+                        <td><img data-src="{{asset($row->post_img)}}" class="lazyload" loading="lazy" alt="post thumb"
+                                 width="80" height="50"></td>
                         <td>
                             <a href="{{ url('post/'. $row->id.'/edit') }}" class="btn table-primary"><i
                                     class="far fa-edit"></i></a>

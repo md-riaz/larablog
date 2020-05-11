@@ -53,7 +53,8 @@
                             <label for="image">Feature Image</label>
                             <input type="file" name="post_img" id="image">
                             <label for="">Current Image</label><br>
-                            <img data-src="{{ asset($post->post_img) }}" class="lazyload" alt="" width="300">
+                            <img data-src="{{ asset($post->post_img) }}" class="lazyload" loading="lazy" alt="old img"
+                                 width="300">
                             <input type="hidden" name="old_img" value="{{$post->post_img}}">
                         </div>
                         <div class=" input-field">

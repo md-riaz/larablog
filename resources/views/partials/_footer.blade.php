@@ -4,13 +4,13 @@
         <a class="follow" href="https://www.instagram.com/md_riaz___/"><i class="fab fa-instagram"></i>instagram
         </a>
         <div class="photo_grid d_flex">
-            <img src="{{ asset('images/photo_grid/1.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/2.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/3.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/4.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/5.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/7.jpg')}}" alt="grid_image">
-            <img src="{{ asset('images/photo_grid/6.jpg')}}" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/1.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/2.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/3.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/4.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/5.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/7.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/6.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
         </div>
     </div>
     <div class="social_bottom">

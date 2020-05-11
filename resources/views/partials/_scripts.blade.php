@@ -1,27 +1,10 @@
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-<script defer src="{{asset('js/lazysizes.min.js')}}"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script defer src="{{asset('js/toastr.min.js')}}"></script>
-<script defer src="{{ asset('js/prism.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script async src="{{ asset('js/app.js') }}"></script>
 <!-- copy url from share method -->
 <script>
-    function copyToClipboard(text) {
-        var dummy = document.createElement("textarea");
-        // to avoid breaking orgain page when copying more words
-        // cant copy when adding below this code
-        // dummy.style.display = 'none'
-        document.body.appendChild(dummy);
-        //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
-        dummy.value = text;
-        dummy.select();
-        document.execCommand("copy");
-        document.body.removeChild(dummy);
-        alert('copied!');
-    }
+
 
     // jquery toastr message -->
     $(document).ready(function () {
@@ -47,16 +30,26 @@
         }
         @endif
     });
-    // slug making
-    $('input#title').keyup(function (e) {
-        var slug = $('input#title').val().toLowerCase().replace(/ /g, "-");
-        $('input#slug').val(slug);
-    });
+
+
+    <!-- Native Lazyload -->
+    if ('loading' in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    } else {
+        // Dynamically import the LazySizes library
+        // const script = document.createElement('script');
+        // script.src =
+        //     'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js';
+        // document.body.appendChild(script);
+    }
+    <!-- Native Lazyload End -->
 
     // Remove 000webhost branding -->
     window.onload = () => {
         let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
         bannerNode.parentNode.removeChild(bannerNode);
     }
-
 </script>

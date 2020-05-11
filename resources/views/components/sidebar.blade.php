@@ -4,7 +4,7 @@
     <div class="about_me">
         <div class="about_me_inner d_flex">
             <div class="avtar">
-                <img data-src="{{ asset('images/me.png')}}" class="lazyload" alt="my_avtar">
+                <img data-src="{{ asset('images/me.png')}}" class="lazyload" loading="lazy" alt="my_avtar">
             </div>
             <div class="title">about me</div>
             <p class="texts">Hi! My name is
@@ -36,15 +36,15 @@
     <div class="follow_insta">
         <h3 class="bottom_bar">follow@md_riaz___</h3>
         <div class="photo_grid d_flex">
-            <img data-src="{{ asset('images/photo_grid/1.jpg')}}" class="lazyload" alt="grid_image">
-            <img data-src="{{ asset('images/photo_grid/2.jpg')}}" class="lazyload" alt="grid_image">
-            <img data-src="{{ asset('images/photo_grid/4.jpg')}}" class="lazyload" alt="grid_image">
-            <img data-src="{{ asset('images/photo_grid/5.jpg')}}" class="lazyload" alt="grid_image">
-            <img data-src="{{ asset('images/photo_grid/3.jpg')}}" class="lazyload" alt="grid_image">
-            <img data-src="{{ asset('images/photo_grid/6.jpg')}}" class="lazyload" alt="grid_image">
-            <img data-src="{{ asset('images/photo_grid/7.jpg')}}" class="lazyload" alt="grid_image">
-            <img data-src="{{ asset('images/photo_grid/8.jpg')}}" class="lazyload" alt="grid_image">
-            <img data-src="{{ asset('images/photo_grid/9.jpg')}}" class="lazyload" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/1.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/2.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/4.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/5.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/3.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/6.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/7.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/8.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
+            <img data-src="{{ asset('images/photo_grid/9.jpg')}}" class="lazyload" loading="lazy" alt="grid_image">
         </div>
     </div>
     <div class="category_section">
@@ -63,7 +63,7 @@
             @foreach ($latest as $item)
                 <div class="latest_post d_flex">
                     <div class="latest_post_preview_img">
-                        <img data-src="{{ asset($item->post_img)}}" class="lazyload" alt="preview_img">
+                        <img data-src="{{ asset($item->post_img)}}" class="lazyload" loading="lazy" alt="preview_img">
                     </div>
                     <div class="posts_desc">
                         <p class="date">{{ $item->created_at->format('d F, Y')}}</p>
@@ -85,7 +85,7 @@
     <div class="banner">
         <h3 class="bottom_bar">banner</h3>
         <div class="banner_img">
-            <img data-src="{{ asset('images/banner.jpg')}}" class="lazyload" alt="banner_img">
+            <img data-src="{{ asset('images/banner.jpg')}}" class="lazyload" loading="lazy" alt="banner_img">
         </div>
     </div>
 

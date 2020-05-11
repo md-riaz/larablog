@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model {
 
     protected $fillable = [
-        'title', 'category_id', 'post_img', 'details',
+        'title', 'category_id', 'post_img', 'details', 'thumbnail'
     ];
 
     // A post can belongs to a auther

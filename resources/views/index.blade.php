@@ -8,7 +8,7 @@
             <div class="posts">
                 <div class="posts_contents_wrapper d_flex">
                     <div class="posts_preview_img">
-                        <img data-src="{{ asset($post->post_img)}}" class="lazyload" alt="preview_img">
+                        <img data-src="{{ asset($post->post_img)}}" class="lazyload" loading="lazy" alt="preview_img">
                     </div>
                     <div class="posts_desc d_flex">
                         <div class="posts_title">
