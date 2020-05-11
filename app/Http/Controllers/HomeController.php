@@ -32,20 +32,12 @@ class HomeController extends Controller {
     {
         if (request('tag')) {
             $posts = Tag::where('name', request('tag'))->firstOrFail()->posts;
+            $posts = $this->paginate($posts);
         } else {
             $posts = Post::with('category')->latest('updated_at')->paginate(7);
         }
 
         return view('index', compact('posts'));
-    }
-
-    public function CategoryPosts(Category $slug)
-    {
-        $posts = $slug->posts;
-
-        return view('index', [
-            'posts' => $this->paginate($posts) // Custom pagination with collection help from paginate() function
-        ]);
     }
 
     /**
@@ -59,6 +51,15 @@ class HomeController extends Controller {
         $items = $items instanceof Collection ? $items : Collection::make($items);
 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
+
+    public function CategoryPosts(Category $slug)
+    {
+        $posts = $slug->posts;
+
+        return view('index', [
+            'posts' => $this->paginate($posts) // Custom pagination with collection help from paginate() function
+        ]);
     }
 
     public function UserPosts(User $id)
