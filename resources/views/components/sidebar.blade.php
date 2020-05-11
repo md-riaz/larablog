@@ -4,7 +4,7 @@
     <div class="about_me">
         <div class="about_me_inner d_flex">
             <div class="avtar">
-                <img data-src="{{ asset('images/me.png')}}" class="lazyload" loading="lazy" alt="my_avtar" width="170"
+                <img data-src="{{ asset('images/me.webp')}}" class="lazyload" loading="lazy" alt="my_avtar" width="170"
                      height="234">
             </div>
             <div class="title">about me</div>
@@ -96,7 +96,8 @@
     <div class="banner">
         <h3 class="bottom_bar">banner</h3>
         <div class="banner_img">
-            <img data-src="{{ asset('images/banner.jpg')}}" class="lazyload" loading="lazy" alt="banner_img" width="270"
+            <img data-src="{{ asset('images/banner.webp')}}" class="lazyload" loading="lazy" alt="banner_img"
+                 width="270"
                  height="368">
         </div>
     </div>
