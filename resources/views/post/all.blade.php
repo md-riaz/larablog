@@ -33,7 +33,7 @@
                             <a href="{{ url('post/'. $row->slug) }}">{{Str::limit($row->title, 25)}}</a>
                         </td>
                         <td>
-                            <a href="{{ url('user/'.$row->user->id.'/post') }}">{{ $row->user->name }}</a>
+                            <a href="{{ url('user/'.$row->user->id.'/posts') }}">{{ $row->user->name }}</a>
                         </td>
                         <td>
                             <a href="{{url('/categories/'.$row->category->slug)}}">{{ $row->category->name }}</a>

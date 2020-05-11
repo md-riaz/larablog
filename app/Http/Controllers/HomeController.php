@@ -63,10 +63,11 @@ class HomeController extends Controller {
 
     public function UserPosts(User $id)
     {
-
         $posts = $id->posts;
 
-        return view('index', compact('posts'));
+        return view('index', [
+            'posts' => $this->paginate($posts) // Custom pagination with collection help from paginate() function
+        ]);
     }
 
 
