@@ -6,6 +6,10 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use App\User;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller {
 
@@ -22,7 +26,7 @@ class HomeController extends Controller {
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index()
     {
@@ -35,12 +39,26 @@ class HomeController extends Controller {
         return view('index', compact('posts'));
     }
 
-
     public function CategoryPosts(Category $slug)
     {
         $posts = $slug->posts;
 
-        return view('index', compact('posts'));
+        return view('index', [
+            'posts' => $this->paginate($posts) // Custom pagination with collection help from paginate() function
+        ]);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     public function UserPosts(User $id)
@@ -50,4 +68,7 @@ class HomeController extends Controller {
 
         return view('index', compact('posts'));
     }
+
+
 }
+
