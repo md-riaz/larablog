@@ -37,23 +37,23 @@
     <div class="follow_insta">
         <h3 class="bottom_bar">follow@md_riaz___</h3>
         <div class="photo_grid d_flex">
-            <img data-src="{{ asset('images/photo_grid/1.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/1.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
-            <img data-src="{{ asset('images/photo_grid/2.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/2.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
-            <img data-src="{{ asset('images/photo_grid/4.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/4.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
-            <img data-src="{{ asset('images/photo_grid/5.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/5.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
-            <img data-src="{{ asset('images/photo_grid/3.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/3.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
-            <img data-src="{{ asset('images/photo_grid/6.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/6.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
-            <img data-src="{{ asset('images/photo_grid/7.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/7.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
-            <img data-src="{{ asset('images/photo_grid/8.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/8.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
-            <img data-src="{{ asset('images/photo_grid/9.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
+            <img data-src="{{ asset('images/photo_grid/9.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
                 width="87" height="87">
         </div>
     </div>
@@ -73,7 +73,7 @@
             @foreach ($latest as $item)
             <div class="latest_post d_flex">
                 <div class="latest_post_preview_img">
-                    <img data-src="{{ asset($item->thumbnail_img)}}" class="lazyload" loading="lazy" alt="preview_img"
+                    <img data-src="{{ asset($item->thumbnail)}}" class="lazyload" loading="lazy" alt="preview_img"
                         width="70" height="70">
                 </div>
                 <div class="posts_desc">

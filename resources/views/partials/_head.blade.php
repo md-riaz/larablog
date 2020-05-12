@@ -63,3 +63,24 @@
 
 <!-- toaster CSS -->
 <link rel="preload" href="{{ asset('css/toastr.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<style>
+    /*
+    * Scroll bar change style
+    */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+        background-color: #f4f7f6;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        background-color: #f5f5f5;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+        background-color: #ccc;
+        opacity: 0.4;
+    }
+</style>

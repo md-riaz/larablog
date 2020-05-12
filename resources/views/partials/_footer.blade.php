@@ -4,20 +4,20 @@
         <a class="follow" href="https://www.instagram.com/md_riaz___/"><i class="fab fa-instagram"></i>instagram
         </a>
         <div class="photo_grid d_flex">
-            <img data-src="{{ asset('images/photo_grid/1.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="165" height="165">
-            <img data-src="{{ asset('images/photo_grid/2.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="165" height="165">
-            <img data-src="{{ asset('images/photo_grid/3.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="165" height="165">
-            <img data-src="{{ asset('images/photo_grid/4.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="165" height="165">
-            <img data-src="{{ asset('images/photo_grid/5.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="165" height="165">
-            <img data-src="{{ asset('images/photo_grid/7.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="165" height="165">
-            <img data-src="{{ asset('images/photo_grid/6.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="165" height="165">
+            <img data-src="{{ asset('images/photo_grid/1.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
+                width="165" height="165">
+            <img data-src="{{ asset('images/photo_grid/2.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
+                width="165" height="165">
+            <img data-src="{{ asset('images/photo_grid/3.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
+                width="165" height="165">
+            <img data-src="{{ asset('images/photo_grid/4.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
+                width="165" height="165">
+            <img data-src="{{ asset('images/photo_grid/5.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
+                width="165" height="165">
+            <img data-src="{{ asset('images/photo_grid/7.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
+                width="165" height="165">
+            <img data-src="{{ asset('images/photo_grid/6.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
+                width="165" height="165">
         </div>
     </div>
     <div class="social_bottom">
