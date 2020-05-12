@@ -5,7 +5,7 @@
         <div class="about_me_inner d_flex">
             <div class="avtar">
                 <img data-src="{{ asset('images/me.webp')}}" class="lazyload" loading="lazy" alt="my_avtar" width="170"
-                     height="234">
+                    height="234">
             </div>
             <div class="title">about me</div>
             <p class="texts">Hi! My name is
@@ -38,31 +38,31 @@
         <h3 class="bottom_bar">follow@md_riaz___</h3>
         <div class="photo_grid d_flex">
             <img data-src="{{ asset('images/photo_grid/1.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/2.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/4.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/5.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/3.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/6.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/7.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/8.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/9.jpg')}}" class="lazyload" loading="lazy" alt="grid_image"
-                 width="87" height="87">
+                width="87" height="87">
         </div>
     </div>
     <div class="category_section">
         <h3 class="bottom_bar">categories</h3>
         <ul>
             @foreach ($categories as $category)
-                <li class="menu-item"><a href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
-                    <span>{{$category->posts_count}}</span></li> <!-- count how many post in a category -->
+            <li class="menu-item"><a href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
+                <span>{{$category->posts_count}}</span></li> <!-- count how many post in a category -->
             @endforeach
         </ul>
     </div>
@@ -71,18 +71,18 @@
 
         <div class="latest_post_wrapper">
             @foreach ($latest as $item)
-                <div class="latest_post d_flex">
-                    <div class="latest_post_preview_img">
-                        <img data-src="{{ asset($item->post_img)}}" class="lazyload" loading="lazy" alt="preview_img"
-                             width="70" height="70">
-                    </div>
-                    <div class="posts_desc">
-                        <p class="date">{{ $item->created_at->format('d F, Y')}}</p>
-                        <a href="{{url('post/'.$item->slug)}}">
-                            <h3 class="title">{{ $item->title}}</h3>
-                        </a>
-                    </div>
+            <div class="latest_post d_flex">
+                <div class="latest_post_preview_img">
+                    <img data-src="{{ asset($item->thumbnail_img)}}" class="lazyload" loading="lazy" alt="preview_img"
+                        width="70" height="70">
                 </div>
+                <div class="posts_desc">
+                    <p class="date">{{ $item->created_at->format('d F, Y')}}</p>
+                    <a href="{{url('post/'.$item->slug)}}">
+                        <h3 class="title">{{ $item->title}}</h3>
+                    </a>
+                </div>
+            </div>
             @endforeach
 
         </div>
@@ -97,8 +97,7 @@
         <h3 class="bottom_bar">banner</h3>
         <div class="banner_img">
             <img data-src="{{ asset('images/banner.webp')}}" class="lazyload" loading="lazy" alt="banner_img"
-                 width="270"
-                 height="368">
+                width="270" height="368">
         </div>
     </div>
 
@@ -114,7 +113,7 @@
         <h3 class="bottom_bar">tags</h3>
         <ul class="taglist d_flex">
             @foreach ($tags as $tag)
-                <li><a href="{{url('/')}}?tag={{$tag->name}}">{{$tag->name}}</a></li>
+            <li><a href="{{url('/')}}?tag={{$tag->name}}">{{$tag->name}}</a></li>
             @endforeach
         </ul>
     </div>
