@@ -8,7 +8,9 @@
 <script>
     // jquery toastr message -->
 
-    $(document).ready(function () {
+   $( window ).on( "load", function() {
+        // display carousel
+        $(".feature-posts").removeClass('d-none');
         // Toastr Notification
             @if(Session::has('message'))
         var type = "{{ Session::get('alert-type', 'info') }}";
