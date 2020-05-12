@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Jobs\SendEmail;
 use App\Mail\ContactMe;
 use Illuminate\Support\Facades\Mail;
 use function request;
@@ -21,8 +22,13 @@ class ContactController extends Controller {
             'email'   => 'required | email',
             'message' => 'required'
         ]);
-        Mail::to(request('email'))->send(new ContactMe(request('name'), request('message')));
 
-        return response()->json(['success' => 'Your message is successfully sent']);
+        $received_email = request('email');
+        $name = request('name');
+        $message = request('message');
+
+        Mail::to($received_email)->send(new ContactMe($name, $message)); // queue a mail message
+
+        return response()->json(['success' => 'Your message is successfully sent']); // return notification on ajax success
     }
 }

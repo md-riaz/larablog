@@ -4,7 +4,6 @@
 
         @forelse ($feature_posts as $item)
 
-
             <div class="feature-post d_flex item owl-lazy" data-src="{{asset($item->post_img)}}">
                 <span class="overlay"></span>
                 <div class="feature-post_content d_flex">
@@ -27,10 +26,8 @@
         @empty
             <p>No Post to show</p>
         @endforelse
-
-
-
     </div>
     <div class="btn-prev"></div>
     <div class="btn-next"></div>
 </section>
+<!--   Feature Post Section End -->

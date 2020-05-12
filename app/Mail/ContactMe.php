@@ -14,9 +14,10 @@ class ContactMe extends Mailable {
     public $message;
 
     /**
-     * Create a new message instance.
+     * Create a new $message instance.
      *
-     * @param $request
+     * @param $name
+     * @param $message
      */
     public function __construct($name, $message)
     {
