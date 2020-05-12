@@ -15,7 +15,8 @@ use Intervention\Image\Facades\Image;
 use Mews\Purifier\Facades\Purifier;
 use Str;
 
-class PostController extends Controller {
+class PostController extends Controller
+{
 
     /**
      * Instantiate a new controller instance.
@@ -80,7 +81,7 @@ class PostController extends Controller {
         $image = request()->file('post_img');
 
         if ($image) {
-            $image_name = hexdec(uniqid()) . "." . Str::of($image->getClientOriginalExtension())->lower(); // unique number with lowercase extension
+            $image_name = hexdec(uniqid()) . ".webp"; // unique number with lowercase extension
             $upload_path = 'uploads/post_img/';                                                            // set the public path
             $img_url = $upload_path . $image_name;
 
