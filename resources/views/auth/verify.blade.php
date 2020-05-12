@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('title' ,'verify')
 @section('content')
-    <div class="container">
+    <div class="col">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -19,7 +19,7 @@
                         <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                             @csrf
                             <button type="submit"
-                                    class="btn btn-link p-0 m-0 align-baseline bg-sienna text-white">{{ __('click here to request another') }}</button>
+                                    class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>
                             .
                         </form>
                     </div>
