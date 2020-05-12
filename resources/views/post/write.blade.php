@@ -87,7 +87,6 @@
         $(document).ready(function () {
             $('.js-select-multiple').select2();
 
-
             // TinyMCE
             tinymce.init({
                 selector: 'textarea#post_desc',
