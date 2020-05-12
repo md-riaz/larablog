@@ -86,7 +86,7 @@ class PostController extends Controller
             $img_url = $upload_path . $image_name;
 
             /* resize image to new width but do not exceed original size*/
-            $new_img = Image::make($image)->encode('webp', 80)->widen(800, function ($constraint) {
+            $new_img = Image::make($image)->encode('webp', 70)->widen(800, function ($constraint) {
                 $constraint->upsize();
             });
             /*  save the new image with new name */
@@ -184,7 +184,7 @@ class PostController extends Controller
             $img_url = $upload_path . $image_name;
 
             /* resize image to new width but do not exceed original size*/
-            $new_img = Image::make($image)->encode('webp', 80)->widen(800, function ($constraint) {
+            $new_img = Image::make($image)->encode('webp', 70)->widen(800, function ($constraint) {
                 $constraint->upsize();
             });
 
