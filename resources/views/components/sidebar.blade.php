@@ -1,11 +1,10 @@
 <!--   Side Bar -->
-
 <section class="side-content">
     <div class="about_me">
         <div class="about_me_inner d_flex">
             <div class="avtar">
                 <img data-src="{{ asset('images/me.webp')}}" class="lazyload" loading="lazy" alt="my_avtar" width="170"
-                    height="234">
+                     height="234">
             </div>
             <div class="title">about me</div>
             <p class="texts">Hi! My name is
@@ -38,31 +37,31 @@
         <h3 class="bottom_bar">follow@md_riaz___</h3>
         <div class="photo_grid d_flex">
             <img data-src="{{ asset('images/photo_grid/1.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/2.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/4.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/5.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/3.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/6.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/7.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/8.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
             <img data-src="{{ asset('images/photo_grid/9.webp')}}" class="lazyload" loading="lazy" alt="grid_image"
-                width="87" height="87">
+                 width="87" height="87">
         </div>
     </div>
     <div class="category_section">
         <h3 class="bottom_bar">categories</h3>
         <ul>
             @foreach ($categories as $category)
-            <li class="menu-item"><a href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
-                <span>{{$category->posts_count}}</span></li> <!-- count how many post in a category -->
+                <li class="menu-item"><a href="{{url('/categories/'.$category->slug)}}">{{ $category->name }}</a>
+                    <span>{{$category->posts_count}}</span></li> <!-- count how many post in a category -->
             @endforeach
         </ul>
     </div>
@@ -71,33 +70,37 @@
 
         <div class="latest_post_wrapper">
             @foreach ($latest as $item)
-            <div class="latest_post d_flex">
-                <div class="latest_post_preview_img">
-                    <img data-src="{{ asset($item->thumbnail)}}" class="lazyload" loading="lazy" alt="preview_img"
-                        width="70" height="70">
+                <div class="latest_post d_flex">
+                    <div class="latest_post_preview_img">
+                        <img data-src="{{ asset($item->thumbnail)}}" class="lazyload" loading="lazy" alt="preview_img"
+                             width="70" height="70">
+                    </div>
+                    <div class="posts_desc">
+                        <p class="date">{{ $item->created_at->format('d F, Y')}}</p>
+                        <a href="{{url('post/'.$item->slug)}}">
+                            <h3 class="title">{{ $item->title}}</h3>
+                        </a>
+                    </div>
                 </div>
-                <div class="posts_desc">
-                    <p class="date">{{ $item->created_at->format('d F, Y')}}</p>
-                    <a href="{{url('post/'.$item->slug)}}">
-                        <h3 class="title">{{ $item->title}}</h3>
-                    </a>
-                </div>
-            </div>
             @endforeach
 
         </div>
     </div>
 
-    <div class="search_bar d_flex">
-        <input type="text" name="search" id="search" placeholder="search...">
-        <button class="flat-btn"><i class="fas fa-search"></i></button>
+    <div class="search_bar">
+        <form action="{{ route('searchItem') }}" method="get" id="searchForm" class="d_flex">
+            @csrf
+            <input type="text" name="search" id="search" placeholder="search...">
+            <button class="flat-btn"><i class="fas fa-search"></i></button>
+        </form>
+        <span class="searchlist"></span>
     </div>
 
     <div class="banner">
         <h3 class="bottom_bar">banner</h3>
         <div class="banner_img">
             <img data-src="{{ asset('images/banner.webp')}}" class="lazyload" loading="lazy" alt="banner_img"
-                width="270" height="368">
+                 width="270" height="368">
         </div>
     </div>
 
@@ -113,10 +116,34 @@
         <h3 class="bottom_bar">tags</h3>
         <ul class="taglist d_flex">
             @foreach ($tags as $tag)
-            <li><a href="{{url('/')}}?tag={{$tag->name}}">{{$tag->name}}</a></li>
+                <li><a href="{{url('/')}}?tag={{$tag->name}}">{{$tag->name}}</a></li>
             @endforeach
         </ul>
     </div>
     <!-- Tags Section End -->
-    <script !src=""></script>
 </section>
+@section('scripts')
+    <script>
+        var searchInput = $('#search'),
+            searchForm = $('#searchForm'),
+            action = searchForm.attr('action'),
+            method = searchForm.attr('method'),
+            searchlist = $('.searchlist')
+
+        searchInput.on('keyup', () => {
+            searchInput.val() === "" ? searchlist.css('display', 'none') : searchlist.css('display', 'block')
+            $.ajax({
+                url: action,
+                type: method,
+                crossDomain: false,
+                data: {'search': searchInput.val()},
+                success: (data) => {
+                    searchlist.html(data)
+                },
+                error: () => {
+                    searchlist.html("Nothing Found")
+                }
+            })
+        })
+    </script>
+@stop

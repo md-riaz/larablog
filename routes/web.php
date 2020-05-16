@@ -51,3 +51,6 @@ Route::resource('comment', 'CommentController');
 
 // User role
 Route::get('/user/role', 'RoleController@index')->name('user.role');
+
+// Search posts
+Route::get('searchItem', 'HomeController@searchItem')->name('searchItem');

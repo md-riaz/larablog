@@ -6,10 +6,13 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use App\User;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\View\View;
 
 class HomeController extends Controller {
 
@@ -45,7 +48,7 @@ class HomeController extends Controller {
      *
      * @var array
      */
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    public function paginate($items, $perPage = 7, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
@@ -53,6 +56,10 @@ class HomeController extends Controller {
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
+    /**
+     * @param Category $slug
+     * @return Application|Factory|View
+     */
     public function CategoryPosts(Category $slug)
     {
         $posts = $slug->posts;
@@ -62,6 +69,10 @@ class HomeController extends Controller {
         ]);
     }
 
+    /**
+     * @param User $id
+     * @return Application|Factory|View
+     */
     public function UserPosts(User $id)
     {
         $posts = $id->posts;
@@ -71,6 +82,20 @@ class HomeController extends Controller {
         ]);
     }
 
+    public function searchItem()
+    {
+        $query = request('search');
+        $posts = Post::where('title', 'like', "%{$query}%")->get();
+        // dd($posts);
+       
+        foreach ($posts as $key => $value) {
+            $result =
+                '<a href="' . url('post/' . $value->slug) . '">' . $value->title . '</a>';
+        }
+
+        return response($result);
+
+    }
 
 }
 
