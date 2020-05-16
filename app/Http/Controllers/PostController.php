@@ -205,6 +205,8 @@ class PostController extends Controller
         // Check if tags has changed or not
         if (isset(request()->tags)) {
             $post->tags()->sync(request()->tags);
+        } else {
+            $post->tags()->sync([]);
         }
         // If success then return with $notification message
         if ($post) {

@@ -6,7 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail {
+class User extends Authenticatable implements MustVerifyEmail
+{
 
     use Notifiable;
 
@@ -40,7 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail {
     /* A user can have many posts */
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class)->latest();
     }
 
     /* A user can have many comments */
@@ -48,4 +49,10 @@ class User extends Authenticatable implements MustVerifyEmail {
     {
         return $this->hasManyThrough(Comment::class, Post::class);
     }
+
+    /* Define user and role relation */
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(Role::class)->withTimestamps();
+    // }
 }
