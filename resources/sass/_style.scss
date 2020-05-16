@@ -846,17 +846,22 @@ blockquote {
 
 .searchlist {
     position: absolute;
-    content: '';
     background: #f9f9f9;
     width: 100%;
     z-index: 1;
     padding: 10px;
     color: #333;
     overflow: hidden;
+    border: 2px solid var(--clr_Sienna);
     display: none;
 
     a {
         text-decoration: underline;
+        font: var(--bold) 0.875em var(--JosefinSans);
+    }
+
+    hr {
+        margin: 0.5rem 0;
     }
 }
 

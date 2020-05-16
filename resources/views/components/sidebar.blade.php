@@ -124,26 +124,39 @@
 </section>
 @section('scripts')
     <script>
+        /* select all needed items */
         var searchInput = $('#search'),
             searchForm = $('#searchForm'),
             action = searchForm.attr('action'),
             method = searchForm.attr('method'),
             searchlist = $('.searchlist')
 
+        /* On search input, check empty or make ajax req */
         searchInput.on('keyup', () => {
-            searchInput.val() === "" ? searchlist.css('display', 'none') : searchlist.css('display', 'block')
-            $.ajax({
-                url: action,
-                type: method,
-                crossDomain: false,
-                data: {'search': searchInput.val()},
-                success: (data) => {
-                    searchlist.html(data)
-                },
-                error: () => {
-                    searchlist.html("Nothing Found")
-                }
-            })
+            // empty the list
+            searchlist.html("")
+            if (searchInput.val() === "") {
+                searchlist.fadeOut("slow")
+            } else {
+                // or make ajax get req
+                searchlist.fadeIn("slow")
+                $.ajax({
+                    url: action,
+                    type: method,
+                    data: {'search': searchInput.val()},
+                    success: (data) => {
+                        $.each(data, function (slug, title) {
+                            searchlist.append(`<a href=post/${slug}>${title}</a><hr>`)
+                        });
+
+                    },
+                    // if error found show something
+                    error: () => {
+                        searchlist.html("Nothing Found")
+                    }
+                })
+            }
+
         })
     </script>
 @stop
