@@ -86,14 +86,14 @@ class HomeController extends Controller {
     {
         $query = request('search');
         $posts = Post::where('title', 'like', "%{$query}%")->get();
-        // dd($posts);
-       
-        foreach ($posts as $key => $value) {
-            $result =
-                '<a href="' . url('post/' . $value->slug) . '">' . $value->title . '</a>';
+
+        if ($posts->isEmpty()) {
+            abort(404);
+        } else {
+            $posts = $posts->pluck('title', 'slug');
         }
 
-        return response($result);
+        return response($posts);
 
     }
 
