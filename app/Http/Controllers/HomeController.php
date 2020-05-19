@@ -84,9 +84,11 @@ class HomeController extends Controller {
 
     public function searchItem()
     {
+        // get the query string
         $query = request('search');
-        $posts = Post::where('title', 'like', "%{$query}%")->get();
-
+        // search in the mysql database and paginate latest
+        $posts = Post::where('title', 'like', "%{$query}%")->latest()->paginate(5);
+        // if result is empty, through an error or return response
         if ($posts->isEmpty()) {
             abort(404);
         } else {

@@ -145,10 +145,10 @@
                     type: method,
                     data: {'search': searchInput.val()},
                     success: (data) => {
+                        // loop array & make url
                         $.each(data, function (slug, title) {
                             searchlist.append(`<a href=post/${slug}>${title}</a><hr>`)
                         });
-
                     },
                     // if error found show something
                     error: () => {

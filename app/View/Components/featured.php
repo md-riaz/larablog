@@ -5,8 +5,8 @@ namespace App\View\Components;
 use App\Post;
 use Illuminate\View\Component;
 
-class Featured extends Component
-{
+class Featured extends Component {
+
     /**
      * Create a new component instance.
      *
@@ -24,12 +24,13 @@ class Featured extends Component
      */
     public function render()
     {
-        return view('components.featured',[
+        return view('components.featured', [
             'feature_posts' => $this->feature_posts()
         ]);
     }
+
     public function feature_posts()
     {
-        return Post::with('category')->latest('updated_at')->take(6)->get();
+        return Post::WithCount('comments')->with('category')->latest('updated_at')->take(6)->get();
     }
 }
