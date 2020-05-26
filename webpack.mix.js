@@ -12,8 +12,8 @@ require("laravel-mix-purgecss");
  */
 
 mix
-  .js("resources/js/app.js", "public/js")
-  .sass("resources/sass/app.scss", "public/css")
-  .purgeCss({
-    enabled: true,
-  });
+    .js("resources/js/app.js", "public/js")
+    .sass("resources/sass/app.scss", "public/css")
+    .purgeCss({
+        // enabled: true,
+    });

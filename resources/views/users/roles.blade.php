@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.manage')
 @section('title' ,'User roles')
 @section('stylesheet')
     <!-- Latest compiled and minified CSS -->

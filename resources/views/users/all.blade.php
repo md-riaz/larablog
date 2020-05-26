@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.manage')
 @section('title' ,'Admin Panel')
 
 @section('content')
@@ -23,14 +23,14 @@
                         <td>{{ $user->posts_count }}</td>
                         <td>{{ $user->comments_count }}</td>
                         <td>
-                            <a href="{{ url('users/'. $user->id.'/edit') }}" class="btn table-primary"><i
+                            <a href="{{ route('users.edit',$user->id) }}" class="btn table-primary"><i
                                     class="far fa-edit"></i></a>
 
                             <form action="" id="deleteForm" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn text-danger" id="delete"
-                                        data-action="{{ url('users/'. $user->id) }}"><i
+                                        data-action="{{ route('users.destroy',$user->id) }}"><i
                                         class="fas fa-trash"></i></button>
                             </form>
                         </td>

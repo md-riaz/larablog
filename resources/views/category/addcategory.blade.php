@@ -1,9 +1,9 @@
-@extends('layouts.layout')
+@extends('layouts.manage')
 @section('title' ,'Add Category')
 
 @section('content')
 
-    <div class="col p-0">
+    <div class="col px-0 py-5">
         <div class="write-post">
             <div class="post-comments">
                 <h2 class="comments-title">Add a new category here.</h2>

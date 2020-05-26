@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.manage')
 
 @section('title' ,'All Posts')
 
@@ -43,14 +43,15 @@
                                  width="80" height="50">
                         </td>
                         <td>
-                            <a href="{{ url('post/'. $row->id.'/edit') }}" class="btn table-primary"><i
+                            <a href="{{ route('post.edit',$row->id) }}" class="btn table-primary"><i
                                     class="far fa-edit"></i></a>
 
                             <form action="" id="deleteForm" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn text-danger" id="delete"
-                                        data-action="{{ url('post/'. $row->id) }}"><i class="fas fa-trash"></i></button>
+                                        data-action="{{ route('post.destroy',$row->id) }}"><i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

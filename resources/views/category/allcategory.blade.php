@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.manage')
 @section('title' ,'All Category')
 
 @section('content')
@@ -27,16 +27,17 @@
                         <td>{{ $row->user->name }}</td>
                         <td>{{ $row->created_at->format('dS F, Y') }}</td>
                         <td>
-                            <a href="{{ url('category/'. $row->id.'/edit') }}" class="btn text-primary"><i
+                            <a href="{{ route('category.edit', $row->id) }}" class="btn text-primary"><i
                                     class="far fa-edit"></i></a>
-                            <a href="{{ url('category/'. $row->id) }}" class="btn text-secondary"><i
+                            <a href="{{ route('category.show',$row->id) }}" class="btn text-secondary"><i
                                     class="far fa-eye"></i></a>
 
                             <form action="" id="deleteForm" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn text-danger" id="delete"
-                                        data-action="{{ url('category/'. $row->id) }}"><i class="fas fa-trash"></i>
+                                        data-action="{{ route('category.destroy',$row->id) }}"><i
+                                        class="fas fa-trash"></i>
                                 </button>
                             </form>
                         </td>

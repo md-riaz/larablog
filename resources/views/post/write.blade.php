@@ -1,11 +1,11 @@
-@extends('layouts.layout')
+@extends('layouts.manage')
 @section('title' ,'Write Post')
 @section('stylesheet')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
 @stop
 @section('content')
 
-    <div class="col">
+    <div class="col pb-5">
         <div class="write-post">
             <div class="post-comments">
                 <h2 class="comments-title">Write a new post here.</h2>

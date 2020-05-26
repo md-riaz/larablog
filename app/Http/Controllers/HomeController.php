@@ -60,7 +60,7 @@ class HomeController extends Controller {
      * @param Category $slug
      * @return Application|Factory|View
      */
-    public function CategoryPosts(Category $slug)
+    public function postsByCategory(Category $slug)
     {
         $posts = $slug->posts;
 
@@ -73,7 +73,7 @@ class HomeController extends Controller {
      * @param User $id
      * @return Application|Factory|View
      */
-    public function UserPosts(User $id)
+    public function postsByAuthor(User $id)
     {
         $posts = $id->posts;
 

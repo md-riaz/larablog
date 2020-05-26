@@ -30,6 +30,7 @@ html {
 
 .bg-sienna {
     background-color: var(--clr_Sienna);
+    color: white;
 }
 
 .text-sienna {
@@ -93,6 +94,10 @@ blockquote {
     border-left: 4px solid #e8e8e8;
     color: gray;
     opacity: 0.9;
+}
+
+section {
+    clear: both;
 }
 
 .d_flex {
@@ -464,6 +469,7 @@ blockquote {
         font: var(--light) 0.75em var(--Raleway);
     }
 }
+
 
 /*
 * Main Post List Section
@@ -1259,6 +1265,12 @@ textarea {
 
         .menu-item {
             padding: 0 10px;
+        }
+
+        .profile_menu {
+            position: fixed;
+            right: 30px;
+            top: 25px;
         }
     }
     #main-content {

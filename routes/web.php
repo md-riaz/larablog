@@ -18,32 +18,39 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes(['verify' => true]);
 
-// Category Posts
-Route::get('/categories/{slug:slug}', 'HomeController@CategoryPosts');
+Route::group(['prefix' => 'manage'], function () {
+    // manage users
+    Route::resource('users', 'UsersController');
 
-//Users Posts
-Route::get('/user/{id}/posts', 'HomeController@UserPosts');
+    // change password
+    Route::post('/users/change/password/{user}', 'UsersController@passChange')->name('users.passChange');
 
-// Categories
-Route::resource('category', 'CategoryController');
+    // manage all categories
+    Route::resource('category', 'CategoryController');
 
-// Tags
-Route::resource('tag', 'TagController');
+    // manage all tags
+    Route::resource('tag', 'TagController');
 
-// Post Control
-Route::resource('post', 'PostController');
+    // manage posts
+    Route::resource('post', 'PostController')->except('show');
+
+});
+
+// view post
 Route::get('/post/{post:slug}', 'PostController@show')->name('post.show')->where('slug', '[\w\d\-\_]+'); //access post using slug
 
-//Users Control
-Route::resource('users', 'UsersController');
-Route::post('/users/change/password/{user}', 'UsersController@passChange')->name('users.passChange');
+// Posts by category
+Route::get('/categories/{slug:slug}', 'HomeController@postsByCategory');
+
+// Posts by author name
+Route::get('/user/{id}/posts', 'HomeController@postsByAuthor');
 
 // Newshelter
 Route::post('/newshelter', 'SubscriberController')->name('subscribe');
 
-//Contact Page
-Route::get('/contact', 'ContactController@index')->name('contact');
-Route::post('/contact', 'ContactController@getMessage')->name('contact');
+// Contact Page
+Route::get('/contact', 'ContactController@index')->name('contact.index');
+Route::post('/contact', 'ContactController@getMessage')->name('contact.post');
 
 // Comments
 Route::post('comment.store/{post_id}', 'CommentController@store')->name('comment.store/');
@@ -54,3 +61,5 @@ Route::get('/user/role', 'RoleController@index')->name('user.role');
 
 // Search posts
 Route::get('searchItem', 'HomeController@searchItem')->name('searchItem');
+
+

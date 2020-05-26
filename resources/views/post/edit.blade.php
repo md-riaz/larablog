@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.manage')
 
 @section('title' ,'Edit Post')
 @section('stylesheet')
@@ -6,7 +6,7 @@
 @stop
 @section('content')
 
-    <div class="col p-0">
+    <div class="col p-0 pb-5">
         <div class="write-post">
             <div class="post-comments">
                 <h2 class="comments-title">Edit an existing post.</h2>
