@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
-use Auth;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use function request;
 
 class UsersController extends Controller {
-
-    /**
-     * UsersController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('verified');
-    }
 
     /**
      * Display a listing of the resource.
@@ -30,9 +23,17 @@ class UsersController extends Controller {
      */
     public function index()
     {
-        $users = User::withCount(['posts', 'comments'])->paginate(10);
+        /*
+         * Check UserPolicy if the user has permission to perform this task
+         */
+        $this->authorize('viewAny', User::class);
 
-        return view('users.all', compact('users'));
+        /*
+         * return to page with posts & pagination
+         */
+        $users = User::withCount(['posts'])->paginate(10);
+
+        return view('users.index', compact('users'));
     }
 
 
@@ -40,11 +41,17 @@ class UsersController extends Controller {
      * Display the specified resource.
      *
      * @param User $user
-     * @return Response
+     * @return Application|Factory|View
      */
     public function show(User $user)
     {
-        echo "show";
+        /*
+        * Check UserPolicy if the user has permission to perform this task
+        */
+        $this->authorize('view', $user);
+        $roles = Role::all();
+
+        return view('users.show')->withRoles($roles)->withUser($user);
     }
 
     /**
@@ -55,6 +62,11 @@ class UsersController extends Controller {
      */
     public function edit(User $user)
     {
+        /*
+        * Check UserPolicy if the user has permission to perform this task
+        */
+        $this->authorize('update', $user);
+
         return view('users.edit');
     }
 
@@ -67,6 +79,12 @@ class UsersController extends Controller {
      */
     public function update(User $user)
     {
+        /*
+        * Check UserPolicy if the user has permission to perform this task
+        */
+        $this->authorize('update', $user);
+
+        // Check if user input password is valid or not
         if (Hash::check(request()->password, $user->password)) {
             $user->update(request()->validate([
                 'name'  => 'required',
@@ -80,6 +98,7 @@ class UsersController extends Controller {
 
             return redirect()->route('users.index')->with($notification);
         }
+        // If not valid return with error
         $notification = [
             'message'    => 'Password does not match from database',
             'alert-type' => 'error'
@@ -96,10 +115,16 @@ class UsersController extends Controller {
      */
     public function destroy(User $user)
     {
-        if (Auth::id() === 1) {
+        /*
+        * Check UserPolicy if the user has permission to perform this task
+        */
+        $this->authorize('delete', $user);
+
+        // Check if user is admin or himself
+        if (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin()) {
             $user->delete();
             $notification = [
-                'message'    => 'Admin deleted user successfully',
+                'message'    => 'Admin has deleted user successfully',
                 'alert-type' => 'success'
             ];
         } elseif (Auth::id() === $user->id) {
@@ -119,14 +144,25 @@ class UsersController extends Controller {
         return back()->with($notification);
     }
 
+    public function showSettings()
+    {
+        return view('settings.password');
+    }
+
+    /**
+     * @param User $user
+     * @return RedirectResponse
+     */
     public function passChange(User $user)
     {
+        // Check if user has inputted current password
         if (request()->current_password == request()->password) {
             $notification = [
                 'message'    => 'New password can not be your old password',
                 'alert-type' => 'error'
             ];
         }
+        // Check if user inputted password is valid or not
         if (Hash::check(request()->current_password, $user->password)) {
             $user->update(request()->validate([
                 'password' => 'required|confirmed|min:6'
@@ -138,5 +174,21 @@ class UsersController extends Controller {
         }
 
         return back()->with($notification);
+    }
+
+    public function changeRole(User $user)
+    {
+        /*
+        * Check UserPolicy if the user has permission to perform this task
+        */
+        $this->authorize('changeRole', User::class);
+
+        // Change role_id field in users table
+        $user->update([
+            'role_id' => request('role')
+        ]);
+
+        return response()->json(['success' => 'Role changed successfully']); // return notification on ajax success
+
     }
 }

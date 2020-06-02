@@ -1,20 +1,21 @@
 @extends('layouts.manage')
-
+<!-- Site title -->
 @section('title' ,'Edit Post')
+<!-- stylesheets -->
 @section('stylesheet')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet"/>
 @stop
 @section('content')
 
     <div class="col p-0 pb-5">
-        <div class="write-post">
-            <div class="post-comments">
-                <h2 class="comments-title">Edit an existing post.</h2>
-                <div class="comment-respond">
-                    <form action="{{ url('post/'.$post->id) }}" method="post" enctype="multipart/form-data">
+        <div class="edit-post">
+            <div>
+                <h2>Edit an existing post.</h2>
+                <div>
+                    <form action="{{ route('post.edit', $post->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <div class="d_flex comment-double">
+                        <div class="d_flex justify-between">
                             <div class="input-field">
                                 <label for="title">Title</label>
                                 <input type="text" name="title" value="{{$post->title}}" aria-required="true" required
@@ -41,7 +42,7 @@
                         <!-- Tags Form Input -->
                         <div class="form-group">
                             <label for="tags">Tags</label>
-                            <select class="js-select-multiple form-control" name="tags[]" multiple="multiple">
+                            <select class="js-select-multiple form-control" name="tags[]" multiple="multiple" id="tags">
                                 @forelse ($tags as $tag)
                                     <option value="{{$tag->id}}">{{$tag->name}}</option>
                                 @empty
@@ -85,9 +86,9 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="https://cdn.tiny.cloud/1/g4v6bvbx4urk83696i0550n97p3pmdnlda80zmyq6f88iu4w/tinymce/5/tinymce.min.js">
+    <script defer src="{{ asset('js/tinymce/tinymce.min.js') }}">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script>
         // Select2 int
         $(document).ready(function () {

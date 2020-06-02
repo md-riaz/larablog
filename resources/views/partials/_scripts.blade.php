@@ -1,14 +1,14 @@
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+{{--<script src="{{ asset('js/jquery-3.5.0.min.js') }}"></script>--}}
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script async src="{{ asset('js/sweetalert2.js') }}"></script>
-<script async src="{{ asset('js/app.js') }}"></script>
 
 <!-- copy url from share method -->
 <script>
     // jquery toastr message -->
 
-   $( window ).on( "load", function() {
+    $(window).on("load", function () {
         // display carousel
         $(".feature-posts").removeClass('d-none');
         // Toastr Notification
@@ -64,9 +64,4 @@
     }
     <!-- Native Lazyload End -->
 
-    // Remove 000webhost branding -->
-    window.onload = () => {
-        let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
-        bannerNode.parentNode.removeChild(bannerNode);
-    }
 </script>

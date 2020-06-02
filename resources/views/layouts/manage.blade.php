@@ -28,8 +28,6 @@
         </section>
     </main>
 
-    <!--    footer section   -->
-    @include('partials._footer')
 </div>
 <!--    all scripts   -->
 @include('partials._scripts')

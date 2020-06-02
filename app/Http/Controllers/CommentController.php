@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CommentController extends Controller {
 
@@ -34,6 +35,7 @@ class CommentController extends Controller {
         $comment = new Comment();
         $comment->name = request()->name;
         $comment->email = request()->email;
+        $comment->avatar = "https://www.gravatar.com/avatar/" . md5(Str::of(request()->email)->trim()->lower()) . "?s=60&d=monsterid";
         $comment->comment = request()->comment;
         $comment->approved = true;
         $comment->post()->associate($post);

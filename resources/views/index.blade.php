@@ -2,6 +2,7 @@
 @section('title' ,'larablog | A laravel blog')
 
 @section('content')
+
     <!--   Main Post Section -->
     <section class="post-list">
         @forelse ($posts as $post)

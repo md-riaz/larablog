@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+*:focus {
+    outline-color: var(--clr_Sienna);
+}
+
 html {
     /*
               * Variables
@@ -98,6 +102,14 @@ blockquote {
 
 section {
     clear: both;
+}
+
+select, option, a {
+    cursor: pointer;
+}
+
+.form-check-input {
+    width: auto;
 }
 
 .d_flex {
@@ -310,6 +322,21 @@ section {
         &:hover {
             background-color: var(--clr_Sienna);
             color: #ffffff;
+        }
+    }
+}
+
+.profile_menu {
+    .dropdown-item {
+        text-transform: capitalize;
+
+        &:active {
+            background-color: var(--clr_Sienna);
+            color: white;
+        }
+
+        i {
+            margin-right: 10px;
         }
     }
 }
@@ -1114,7 +1141,7 @@ textarea {
     border-radius: 0;
 }
 
-.comment-double {
+.justify-between {
     justify-content: space-between;
 
     .input-field {
@@ -1273,15 +1300,17 @@ textarea {
             top: 25px;
         }
     }
-    #main-content {
-        margin-top: 90px;
-    }
     .header .main-nav .sub-menu {
         left: 0;
     }
 }
 
 @media (max-width: 768px) {
+    .justify-between {
+        .input-field {
+            width: 100%;
+        }
+    }
     .pagination {
         display: block;
     }

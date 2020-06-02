@@ -13,12 +13,14 @@ use Illuminate\View\View;
 
 class CategoryController extends Controller {
 
-    /**
+
+    /*
+     * Check CategoryPolicy for authorization
      * CategoryController constructor.
      */
     public function __construct()
     {
-        $this->middleware('verified');
+        $this->authorizeResource(Category::class, 'category');
     }
 
     /**
@@ -30,7 +32,7 @@ class CategoryController extends Controller {
     {
         $categories = Category::paginate(10);
 
-        return view('category.allcategory', compact('categories'));
+        return view('category.index', compact('categories'));
     }
 
     /**
@@ -40,7 +42,7 @@ class CategoryController extends Controller {
      */
     public function create()
     {
-        return view('category.addcategory');
+        return view('category.store');
     }
 
     /**
@@ -90,7 +92,7 @@ class CategoryController extends Controller {
      */
     public function show(Category $category)
     {
-        return view('category.viewcategory', compact('category'));
+        return view('category.show', compact('category'));
     }
 
     /**
@@ -101,7 +103,7 @@ class CategoryController extends Controller {
      */
     public function edit(Category $category)
     {
-        return view('category.editcategory', compact('category'));
+        return view('category.edit', compact('category'));
     }
 
     /**

@@ -1,10 +1,15 @@
+<!-- Header -->
 <header class="header">
     <div class="header_inside d_flex">
         <div class="navigation-container">
+            <!-- Mobile burger menu icon -->
             <div class="menuBar"><i class="fas fa-bars"></i></div>
             <div class="main-nav">
+                <!-- navigation bar -->
                 <nav>
+                    <!-- mobile menu close btn -->
                     <div class="close"><i class="fas fa-times"></i></div>
+                    <!-- menu start -->
                     <ul class="menu">
                         <li><a href="{{ URL::to('/') }}">home</a></li>
                         <li class="multi-nav"><a href="#">categories</a>
@@ -32,11 +37,12 @@
                         @endif
 
                     </ul>
+                    <!-- menu end -->
                 </nav>
             </div>
         </div>
 
-    @if (auth()->user())
+    @if (auth()->check())
         <!-- if login, then show profile menus -->
             <div class="profile_menu">
                 <div class="dropdown">
@@ -44,17 +50,26 @@
                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Hey! {{ auth()->user()->name }}
                     </span>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{ route('users.edit',auth()->id()) }}">profile</a>
-                        <a class="dropdown-item" href="{{ route('post.create') }}">write post</a>
-                        <a class="dropdown-item" href="{{ route('category.create') }}">add category</a>
-                        <a class="dropdown-item" href="{{ route('tag.index') }}">Tags</a>
-                        <a class="dropdown-item" href="{{ route('category.index') }}">all category</a>
-                        <a class="dropdown-item" href="{{ route('users.index') }}">all users</a>
-                        <a class="dropdown-item" href="{{ route('post.index') }}">all posts</a>
+                    <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ route('users.edit',auth()->id()) }}"><i
+                                class="far fa-user-circle"></i> profile</a>
+                        <a class="dropdown-item" href="{{ route('post.create') }}"><i class="fas fa-pen-nib"></i> write
+                            post</a>
+                        <a class="dropdown-item" href="{{ route('category.index') }}"><i class="far fa-list-alt"></i>
+                            categories</a>
+                        <a class="dropdown-item" href="{{ route('tag.index') }}"><i class="fas fa-tags"></i> Tags</a>
+                        <a class="dropdown-item" href="{{ route('users.index') }}"><i class="fas fa-users"></i>
+                            registered users</a>
+                        <a class="dropdown-item" href="{{ route('post.index') }}"><i class="far fa-newspaper"></i> all
+                            posts</a>
+                        <a class="dropdown-item" href="{{ route('roles.index') }}"><i class="fas fa-user-shield"></i>
+                            Roles & permissions</a>
+                        <a class="dropdown-item" href="{{ route('users.setting') }}"><i class="fas fa-cog"></i>
+                            Settings</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i>
                             {{ __('Logout') }}
                         </a>
 
@@ -65,7 +80,8 @@
                     </div>
                 </div>
             </div>
-        @else
+    @else
+        <!-- if not logged then show social icons -->
             <div class="social_btns">
                 <div class="social_btn">
                     <i class="fas fa-share-alt"></i>
@@ -84,6 +100,7 @@
 
 
     </div>
+    <!-- Main Logo -->
     <div class="logo-container bottom_bar">
         <a href="{{ URL::to('/') }}">Lara Blog</a>
     </div>

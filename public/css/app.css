@@ -11209,6 +11209,10 @@ a.text-dark:focus {
   box-sizing: border-box;
 }
 
+*:focus {
+  outline-color: var(--clr_Sienna);
+}
+
 html {
   /*
             * Variables
@@ -11300,6 +11304,16 @@ blockquote {
 
 section {
   clear: both;
+}
+
+select,
+option,
+a {
+  cursor: pointer;
+}
+
+.form-check-input {
+  width: auto;
 }
 
 .d_flex {
@@ -11508,6 +11522,19 @@ section {
 .social a:hover {
   background-color: var(--clr_Sienna);
   color: #ffffff;
+}
+
+.profile_menu .dropdown-item {
+  text-transform: capitalize;
+}
+
+.profile_menu .dropdown-item:active {
+  background-color: var(--clr_Sienna);
+  color: white;
+}
+
+.profile_menu .dropdown-item i {
+  margin-right: 10px;
 }
 
 /*
@@ -12321,11 +12348,11 @@ textarea {
   border-radius: 0;
 }
 
-.comment-double {
+.justify-between {
   justify-content: space-between;
 }
 
-.comment-double .input-field {
+.justify-between .input-field {
   width: calc(50% - 20px);
 }
 
@@ -12484,16 +12511,16 @@ textarea {
     top: 25px;
   }
 
-  #main-content {
-    margin-top: 90px;
-  }
-
   .header .main-nav .sub-menu {
     left: 0;
   }
 }
 
 @media (max-width: 768px) {
+  .justify-between .input-field {
+    width: 100%;
+  }
+
   .pagination {
     display: block;
   }

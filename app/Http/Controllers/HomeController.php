@@ -17,16 +17,6 @@ use Illuminate\View\View;
 class HomeController extends Controller {
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return Renderable
@@ -44,7 +34,7 @@ class HomeController extends Controller {
     }
 
     /**
-     * The attributes that are mass assignable.
+     * Paginate collections.
      *
      * @var array
      */
@@ -73,12 +63,12 @@ class HomeController extends Controller {
      * @param User $id
      * @return Application|Factory|View
      */
-    public function postsByAuthor(User $id)
+    public function postsByAuthor(User $user)
     {
-        $posts = $id->posts;
+        $posts = $user->posts;
 
         return view('index', [
-            'posts' => $this->paginate($posts) // Custom pagination with collection help from paginate() function
+            'posts' => $this->paginate($posts, '7') // Custom pagination with collection help from paginate() function
         ]);
     }
 

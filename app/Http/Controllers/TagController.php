@@ -16,7 +16,7 @@ class TagController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware('verified');
+        $this->authorizeResource(Tag::class, 'tag');
     }
 
     /**

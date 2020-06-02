@@ -18,11 +18,12 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes(['verify' => true]);
 
-Route::group(['prefix' => 'manage'], function () {
+Route::group(['prefix' => 'manage', 'middleware' => 'auth'], function () {
     // manage users
     Route::resource('users', 'UsersController');
 
     // change password
+    Route::get('user/settings', 'UsersController@showSettings')->name('users.setting');
     Route::post('/users/change/password/{user}', 'UsersController@passChange')->name('users.passChange');
 
     // manage all categories
@@ -34,6 +35,14 @@ Route::group(['prefix' => 'manage'], function () {
     // manage posts
     Route::resource('post', 'PostController')->except('show');
 
+    // manage roles
+    Route::resource('roles', 'RoleController')->except('create');
+
+    // manage permissions
+    Route::resource('permissions', 'PermissionController')->except('index', 'create');
+
+    // Change role
+    Route::post('change/role/{user}', 'UsersController@changeRole')->name('changeRole');
 });
 
 // view post
@@ -43,7 +52,7 @@ Route::get('/post/{post:slug}', 'PostController@show')->name('post.show')->where
 Route::get('/categories/{slug:slug}', 'HomeController@postsByCategory');
 
 // Posts by author name
-Route::get('/user/{id}/posts', 'HomeController@postsByAuthor');
+Route::get('/user/{user}/posts', 'HomeController@postsByAuthor');
 
 // Newshelter
 Route::post('/newshelter', 'SubscriberController')->name('subscribe');

@@ -6,8 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
-{
+class User extends Authenticatable implements MustVerifyEmail {
 
     use Notifiable;
 
@@ -17,7 +16,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'role_id'
     ];
 
     /**
@@ -51,8 +53,24 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /* Define user and role relation */
-    // public function roles()
-    // {
-    //     return $this->belongsToMany(Role::class)->withTimestamps();
-    // }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /* Define a user permissions */
+    public function permissions()
+    {
+        return $this->role->permissions->pluck('slug')->unique();
+    }
+
+    public function isAdmin()
+    {
+        return $this->role->name === 'Admin';
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->role->name === 'SuperAdmin';
+    }
 }

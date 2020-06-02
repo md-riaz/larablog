@@ -2,10 +2,10 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="7d7751b6-cd87-4879-b4be-6aedcddda221" name="larablog" url="http://larablog.ml">
-        <fileTransfer rootFolder="/public_html/" host="files.000webhost.com" port="21">
+      <webServer id="f99fd870-73d8-4bbd-b079-9243a3490446" name="infinityfree" url="http://larablog.ml">
+        <fileTransfer rootFolder="/larablog.ml/htdocs" host="ftpupload.net" port="21">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" showHiddenFiles="true" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>

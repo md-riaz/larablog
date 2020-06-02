@@ -7,26 +7,18 @@ use App\Post;
 use App\Tag;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
 use Mews\Purifier\Facades\Purifier;
-use Str;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
 
-    /**
-     * Instantiate a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('verified')->except('show'); // check authorization for all methods except show method
-    }
 
     /**
      * Display a listing of the resource.
@@ -35,9 +27,35 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(10);
+        /*
+         * Check PostPolicy if the user has permission to perform this task
+         */
+        $this->authorize('viewAny', Post::class);
 
-        return view('post.all', compact('posts'));
+        // If logged user is admin or super admin
+        if (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin()) {
+            $posts = Post::latest()->paginate(20);
+        } else {
+            // only authors posts
+            $UserPosts = auth()->user()->posts;
+            $posts = $this->paginate($UserPosts, '7');
+        }
+
+
+        return view('post.index', compact('posts'));
+    }
+
+    /**
+     * Paginate collections.
+     *
+     * @var array
+     */
+    public function paginate($items, $perPage = 7, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     /**
@@ -47,6 +65,11 @@ class PostController extends Controller
      */
     public function create()
     {
+        /*
+         * Check PostPolicy if the user has permission to perform this task
+         */
+        $this->authorize('create', Post::class);
+
         return view('post.write', [
             'categories' => Category::all(),
             'tags'       => Tag::all()
@@ -61,6 +84,11 @@ class PostController extends Controller
      */
     public function store()
     {
+        /*
+         * Check PostPolicy if the user has permission to perform this task
+         */
+        $this->authorize('create', Post::class);
+
         // Validate input data
         request()->validate([
             'title'       => 'required|max:255|min:5|unique:posts,title',
@@ -81,7 +109,7 @@ class PostController extends Controller
         $image = request()->file('post_img');
 
         if ($image) {
-            $image_name = hexdec(uniqid()) . ".webp"; // unique number with lowercase extension
+            $image_name = hexdec(uniqid()) . ".webp";                                                      // unique number with lowercase extension
             $upload_path = 'uploads/post_img/';                                                            // set the public path
             $img_url = $upload_path . $image_name;
 
@@ -113,7 +141,7 @@ class PostController extends Controller
                 'alert-type' => 'success'
             ];
 
-            return redirect()->to('post')->with($notification);
+            return redirect()->route('post.index')->with($notification);
         } else {
             $notification = [
                 'message'    => 'Error Occurred!',
@@ -147,6 +175,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        /*
+         * Check PostPolicy if the user has permission to perform this task
+         */
+        $this->authorize('update', Post::class);
+
         $categories = Category::all();
         $tags = Tag::all();
 
@@ -156,12 +189,16 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request request()
      * @param Post $post
      * @return RedirectResponse
      */
     public function update(Post $post)
     {
+        /*
+         * Check PostPolicy if the user has permission to perform this task
+         */
+        $this->authorize('update', Post::class);
+
         // Validate input data
         request()->validate([
             'title'       => 'required|max:255|min:5|unique:posts,title,' . $post->id,
@@ -179,11 +216,11 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $image = request()->file('post_img');
         if ($image) {
-            $image_name = hexdec(uniqid()) . ".webp";                                                      // unique number with lowercase extension
-            $upload_path = 'uploads/post_img/';                                                            // set the public path
+            $image_name = hexdec(uniqid()) . ".webp";  // unique number with lowercase extension
+            $upload_path = 'uploads/post_img/';        // set the public path
             $img_url = $upload_path . $image_name;
 
-            /* resize image to new width but do not exceed original size*/
+            /* resize image to new width but do not exceed original size */
             $new_img = Image::make($image)->encode('webp', 70)->widen(800, function ($constraint) {
                 $constraint->upsize();
             });

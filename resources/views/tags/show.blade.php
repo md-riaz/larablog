@@ -6,7 +6,11 @@
         <div class="d-flex justify-content-between mb-3">
             <h2 class="mb-0">{{  $tag->name }} Tag <span class="badge badge-secondary">{{ $tag->posts->count() }}
                 Posts</span></h2>
-            <a class="btn btn-primary" href="{{ route('tag.edit', $tag->id) }}">Edit</a>
+
+            @can('update', \App\Tag::class)
+                <a class="btn btn-primary" href="{{ route('tag.edit', $tag->id) }}">Edit</a>
+            @endcan
+            
         </div>
         <div class="table-responsive text-nowrap">
             <table class="table table-striped">

@@ -1,18 +1,31 @@
 @extends('layouts.manage')
+<!-- Site title -->
 @section('title' ,'Write Post')
+<!-- stylesheets -->
 @section('stylesheet')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet"/>
 @stop
 @section('content')
 
     <div class="col pb-5">
         <div class="write-post">
-            <div class="post-comments">
-                <h2 class="comments-title">Write a new post here.</h2>
-                <div class="comment-respond">
-                    <form action="{{ url('post') }}" method="post" enctype="multipart/form-data">
+            <div>
+                <h2>Write a new post here.</h2>
+                <!--  Displaying The Validation Errors -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+            @endif
+            <!-- Displaying The Validation Errors -->
+                <div>
+                    <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="d_flex comment-double">
+                        <div class="d_flex justify-between">
                             <div class="input-field">
                                 <label for="title">Title</label>
                                 <input type="text" name="title" placeholder="Post Title *" aria-required="true" required
@@ -39,7 +52,7 @@
                         <!-- Tags Form Input -->
                         <div class="form-group">
                             <label for="tags">Tags</label>
-                            <select class="js-select-multiple form-control" name="tags[]" multiple="multiple">
+                            <select class="js-select-multiple form-control" name="tags[]" multiple="multiple" id="tags">
                                 @forelse ($tags as $tag)
                                     <option value="{{$tag->id}}">{{$tag->name}}</option>
                                 @empty
@@ -53,20 +66,11 @@
                         </div>
                         <div class="input-field">
                             <label for="post_desc">Post body</label>
-                            <textarea name="details" rows="20" placeholder="Post Details *" aria-required="true"
+                            <textarea name="details" rows="20" placeholder="Compose your masterpiece"
+                                      aria-required="true"
                                       id="post_desc" style="height: auto;">{{old('details')}}</textarea>
                         </div>
-                        <!--  Displaying The Validation Errors -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                    @endif
-                    <!-- Displaying The Validation Errors -->
+
                         <p class="form-submit">
                             <input type="submit" class="submit" value="Submit your post" required/>
                         </p>
@@ -79,9 +83,9 @@
 
 @endsection
 @section('scripts')
-    <script src="https://cdn.tiny.cloud/1/g4v6bvbx4urk83696i0550n97p3pmdnlda80zmyq6f88iu4w/tinymce/5/tinymce.min.js">
+    <script defer src="{{ asset('js/tinymce/tinymce.min.js') }}">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script async src="{{ asset('js/select2.min.js') }}"></script>
     <script>
         // Select2 int
         $(document).ready(function () {
