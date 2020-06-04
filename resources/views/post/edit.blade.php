@@ -12,7 +12,7 @@
             <div>
                 <h2>Edit an existing post.</h2>
                 <div>
-                    <form action="{{ route('post.edit', $post->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('post.update', $post->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="d_flex justify-between">

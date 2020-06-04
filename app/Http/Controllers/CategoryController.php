@@ -135,7 +135,7 @@ class CategoryController extends Controller {
                 'alert-type' => 'success'
             ];
 
-            return redirect()->to('/category')->with($notification);
+            return redirect()->route('category.index')->with($notification);
         } else {
             $notification = [
                 'message'    => 'Error Occurred!',

@@ -252,7 +252,7 @@ class PostController extends Controller {
                 'alert-type' => 'success'
             ];
 
-            return redirect()->to('post')->with($notification);
+            return redirect()->route('post.index')->with($notification);
         } else {
             $notification = [
                 'message'    => 'Error Occurred!',

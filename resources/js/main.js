@@ -103,7 +103,7 @@ $(document).ready(function () {
 
     /* slug making */
     $('input#title').keyup(function (e) {
-        var slug = $('input#title').val().toLowerCase().replace(/ /g, "-");
+        var slug = $('input#title').val().toLowerCase().replace(/[^a-zA-Z]/g, "-");
         $('input#slug').val(slug);
     });
 
