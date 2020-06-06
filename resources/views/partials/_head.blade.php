@@ -37,32 +37,21 @@
 <!-- Styles -->
 
 <!-- Google Fonts -->
-<link rel="preload"
-    href="https://fonts.googleapis.com/css?family=Baloo+Da+2:400,700|Josefin+Sans:400,700|Mrs+Sheppards|Open+Sans:300,400,700|Raleway:300,700&display=swap"
-    as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Baloo+Da+2:400,700|Josefin+Sans:400,700|Mrs+Sheppards|Open+Sans:300,400,700|Raleway:300,700&display=swap">
 
 <!-- Font Awesome 5 -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
 <!-- Prism CSS -->
-<link rel="preload" href="{{ asset('css/prism.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="{{ asset('css/prism.css') }}">
 
-<!-- If no javascript is available -->
-<noscript>
-    <link
-        href="https://fonts.googleapis.com/css?family=Baloo+Da+2:400,700|Josefin+Sans:400,700|Mrs+Sheppards|Open+Sans:300,400,700|Raleway:300,700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link href="{{ asset('css/prism.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
-</noscript>
 
 <!-- Custom CSS -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 <!-- toaster CSS -->
-<link rel="preload" href="{{ asset('css/toastr.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
 <style>
     /*

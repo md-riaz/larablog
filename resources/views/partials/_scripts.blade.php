@@ -1,5 +1,4 @@
 <!-- Scripts -->
-{{--<script src="{{ asset('js/jquery-3.5.0.min.js') }}"></script>--}}
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script async src="{{ asset('js/sweetalert2.js') }}"></script>
