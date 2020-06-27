@@ -808,7 +808,7 @@ select, option, a {
                 background-color: #35363b;
                 opacity: 0.1;
                 left: 0;
-                bottom: 0px;
+                bottom: 0;
             }
 
             span {
@@ -1452,14 +1452,11 @@ input#remember {
 
 // tags selection color
 
-.select2-container--default
-.select2-results__option--highlighted[aria-selected] {
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: #b59f5b;
 }
 
-.select2-container--default
-.select2-selection--multiple
-.select2-selection__choice {
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
     background-color: #e1d9bd;
     border: 1px solid #fff9f9;
 }
@@ -1477,4 +1474,8 @@ input#remember {
     &__content {
         width: 100%;
     }
+}
+
+img[alt="000webhost logo"] {
+    display: none;
 }
