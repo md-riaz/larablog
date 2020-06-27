@@ -27,7 +27,7 @@
                         <td>
 
                             @can('update', $user)
-                                <a href="#" class="btn text-primary"><i
+                                <a href="{{route('users.edit', $user->id)}}" class="btn text-primary"><i
                                         class="far fa-edit"></i></a>
                             @endcan
                             @can('delete', $user)
