@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Notifications\Payment;
 use App\Post;
 use App\Tag;
 use App\User;
@@ -12,9 +13,11 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\View\View;
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
 
     /**
      * Show the application dashboard.
@@ -86,8 +89,5 @@ class HomeController extends Controller {
         }
 
         return response($posts);
-
     }
-
 }
-
