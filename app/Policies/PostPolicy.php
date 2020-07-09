@@ -41,7 +41,7 @@ class PostPolicy {
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user()->id || $user->permissions()->contains('update-posts');
+        return $user->id === $post->user->id || $user->permissions()->contains('update-posts');
     }
 
 
@@ -54,7 +54,7 @@ class PostPolicy {
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user()->id || $user->permissions()->contains('delete-posts');
+        return $user->id === $post->user->id || $user->permissions()->contains('delete-posts');
     }
 
 
