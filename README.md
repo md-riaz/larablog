@@ -9,4 +9,4 @@
 
 ## About larablog
 
-http://larablog.ml
+http://larablog.ga
