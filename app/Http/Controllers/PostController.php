@@ -178,7 +178,7 @@ class PostController extends Controller {
         /*
          * Check PostPolicy if the user has permission to perform this task
          */
-        $this->authorize('update', Post::class);
+        $this->authorize('update', $post);
 
         $categories = Category::all();
         $tags = Tag::all();
@@ -197,7 +197,7 @@ class PostController extends Controller {
         /*
          * Check PostPolicy if the user has permission to perform this task
          */
-        $this->authorize('update', Post::class);
+        $this->authorize('update', $post);
 
         // Validate input data
         request()->validate([
