@@ -51,21 +51,35 @@
                         Hey! {{ auth()->user()->name }}
                     </span>
                     <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{ route('users.edit',auth()->id()) }}"><i
-                                class="far fa-user-circle"></i> profile</a>
+
+                        @can('update', auth()->user())
+                            <a class="dropdown-item" href="{{ route('users.edit',auth()->id()) }}"><i
+                                    class="far fa-user-circle"></i> profile</a>
+                        @endcan
+
                         <a class="dropdown-item" href="{{ route('post.create') }}"><i class="fas fa-pen-nib"></i> write
                             post</a>
+
                         <a class="dropdown-item" href="{{ route('category.index') }}"><i class="far fa-list-alt"></i>
                             categories</a>
+
                         <a class="dropdown-item" href="{{ route('tag.index') }}"><i class="fas fa-tags"></i> Tags</a>
-                        <a class="dropdown-item" href="{{ route('users.index') }}"><i class="fas fa-users"></i>
-                            registered users</a>
+
+                        @can('viewAny', auth()->user())
+                            <a class="dropdown-item" href="{{ route('users.index') }}"><i class="fas fa-users"></i>
+                                registered users</a>
+                        @endcan
+
+
                         <a class="dropdown-item" href="{{ route('post.index') }}"><i class="far fa-newspaper"></i> all
                             posts</a>
+
                         <a class="dropdown-item" href="{{ route('roles.index') }}"><i class="fas fa-user-shield"></i>
                             Roles & permissions</a>
+
                         <a class="dropdown-item" href="{{ route('users.setting') }}"><i class="fas fa-cog"></i>
                             Settings</a>
+                            
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
